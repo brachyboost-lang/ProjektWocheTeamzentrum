@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjektWocheTeamzentrum.Models
+namespace ProjektWocheTeamzentrum.Models.Events
 {
-    public class Guest : User
+    public class Meeting : Event
     {
     }
 }
