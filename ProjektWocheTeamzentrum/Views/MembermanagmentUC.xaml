@@ -35,8 +35,14 @@
         <Button Content="Delete Member" Click="DeleteMember_Click" Grid.Column="1" Grid.Row="5"/>
         <Button Content="Edit Member" Click="EditMember_Click" Grid.Column="1" Grid.Row="7"/>
         <Button Content="Back" Click="Back_Click" Grid.Column="1" Grid.Row="9"/>
-        <ListBox x:Name="MembersListBox" ItemsSource="{Binding Members}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="11" Margin="10" Visibility="Collapsed"/>
-        <TextBlock Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10" Background="LightGray">
+        <ListView x:Name="MembersListBox"  ItemsSource="{Binding Members}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="11" Margin="10" Visibility="Collapsed">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock x:Name="StatsTextBlock" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10" Background="LightGray">
             <Label Content="Total Members: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
             <Label Content="{Binding TotalMembers}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
             <Label Content="Squads: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>

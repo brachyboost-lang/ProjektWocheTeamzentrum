@@ -31,10 +31,12 @@ namespace ProjektWocheTeamzentrum.Views
             if (MembersListBox.Visibility == Visibility.Collapsed)
             {
                 btnViewMembers.Content = "Show Members";
+                StatsTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
                 btnViewMembers.Content = "Hide Members";
+                StatsTextBlock.Visibility = Visibility.Collapsed;
             }
         }
 

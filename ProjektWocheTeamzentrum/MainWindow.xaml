@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWocheTeamzentrum"
         mc:Ignorable="d"
-        Title="Teamzentrum" Height="450" Width="800">
+        Title="Teamzentrum" Height="800" Width="1200">
     <StackPanel>
         <DockPanel>
             <Grid>
@@ -23,6 +23,6 @@
                 
             </Grid>
         </DockPanel>
-        <ContentControl x:Name="MainContentControl" Margin="10" Content=""/>
+        <ContentControl x:Name="MainContentControl" Margin="10" />
     </StackPanel> 
 </Window>
