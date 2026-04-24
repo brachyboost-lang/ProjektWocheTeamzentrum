@@ -13,7 +13,7 @@ namespace ProjektWocheTeamzentrum.Utilities
         public static async Task<List<User>> GetAllMembersAsync()
         {
             List<User> members = new List<User>();
-            string jsonText = File.ReadAllText("members.json");
+            string jsonText = await File.ReadAllTextAsync("members.json");
             JsonSerializer.Deserialize<List<User>>(jsonText)?.ForEach(m => members.Add(m));
             return members;
         }

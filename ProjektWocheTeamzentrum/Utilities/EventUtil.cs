@@ -13,7 +13,7 @@ namespace ProjektWocheTeamzentrum.Utilities
         public static async Task<List<Event>> GetAllEventsAsync()
         {
             List<Event> events = new List<Event>();
-            string json = File.ReadAllText("events.json");
+            string json = await File.ReadAllTextAsync("events.json");
             JsonSerializer.Deserialize<List<Event>>(json)?.ForEach(e => events.Add(e));
             return events;
         }
