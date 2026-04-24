@@ -15,7 +15,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public string Name { get; set; } = string.Empty;
         public User SelectedMember { get; set; } = null!;
 
-        public async Task InitializeMembers()
+        public async Task InitializeMembersAsync()
         {
             try
             {
