@@ -4,9 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjektWocheTeamzentrum.Views"
+             xmlns:vm="clr-namespace:ProjektWocheTeamzentrum.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:MembermanagmentVM/>
+    </UserControl.DataContext>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="500*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnViewMembers" Content="Show Members" Click="ViewMembers_Click" Grid.Column="1" Grid.Row="1"/>
+        <Button Content="Add Member" Click="AddMember_Click" Grid.Column="1" Grid.Row="3"/>
+        <Button Content="Delete Member" Click="DeleteMember_Click" Grid.Column="1" Grid.Row="5"/>
+        <Button Content="Edit Member" Click="EditMember_Click" Grid.Column="1" Grid.Row="7"/>
+        <Button Content="Back" Click="Back_Click" Grid.Column="1" Grid.Row="9"/>
+        <ListBox x:Name="MembersListBox" ItemSource="{Binding Members}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="11" Margin="10" Visibility="Collapsed"/>
+        
     </Grid>
 </UserControl>

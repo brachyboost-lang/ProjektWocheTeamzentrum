@@ -18,9 +18,22 @@ namespace ProjektWocheTeamzentrum.Views
     /// </summary>
     public partial class MembermanagmentUC : UserControl
     {
+        
         public MembermanagmentUC()
         {
             InitializeComponent();
+        }
+        public void ViewMembers(object sender, RoutedEventArgs e)
+        {
+            MembersListBox.Visibility = Visibility.Visible;
+            if (MembersListBox.Visibility == Visibility.Collapsed)
+            {
+                btnViewMembers.Content = "Show All Members";
+            }
+            else
+            {
+                btnViewMembers.Content = "Back";
+            }
         }
     }
 }
