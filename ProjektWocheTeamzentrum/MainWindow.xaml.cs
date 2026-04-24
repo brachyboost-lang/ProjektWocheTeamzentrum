@@ -20,5 +20,25 @@ namespace ProjektWocheTeamzentrum
         {
             InitializeComponent();
         }
+
+        public void EventUC_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: switch to Events view
+        }
+
+        public void UsermanagmentUC_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: switch to User management view
+        }
+
+        public void CoachingUC_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: switch to Coaching view
+        }
+
+        public void SettingsUC_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: switch to Settings view
+        }
     }
 }

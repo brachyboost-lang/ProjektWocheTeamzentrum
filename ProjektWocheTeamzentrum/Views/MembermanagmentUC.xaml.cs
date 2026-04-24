@@ -23,17 +23,39 @@ namespace ProjektWocheTeamzentrum.Views
         {
             InitializeComponent();
         }
-        public void ViewMembers(object sender, RoutedEventArgs e)
+
+        public void ViewMembers_Click(object sender, RoutedEventArgs e)
         {
-            MembersListBox.Visibility = Visibility.Visible;
+            MembersListBox.Visibility = MembersListBox.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+
             if (MembersListBox.Visibility == Visibility.Collapsed)
             {
-                btnViewMembers.Content = "Show All Members";
+                btnViewMembers.Content = "Show Members";
             }
             else
             {
-                btnViewMembers.Content = "Back";
+                btnViewMembers.Content = "Hide Members";
             }
+        }
+
+        public void AddMember_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement add member logic
+        }
+
+        public void DeleteMember_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement delete member logic
+        }
+
+        public void EditMember_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement edit member logic
+        }
+
+        public void Back_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement back navigation logic
         }
     }
 }

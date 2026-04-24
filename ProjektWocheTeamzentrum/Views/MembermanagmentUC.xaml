@@ -35,7 +35,7 @@
         <Button Content="Delete Member" Click="DeleteMember_Click" Grid.Column="1" Grid.Row="5"/>
         <Button Content="Edit Member" Click="EditMember_Click" Grid.Column="1" Grid.Row="7"/>
         <Button Content="Back" Click="Back_Click" Grid.Column="1" Grid.Row="9"/>
-        <ListBox x:Name="MembersListBox" ItemSource="{Binding Members}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="11" Margin="10" Visibility="Collapsed"/>
+        <ListBox x:Name="MembersListBox" ItemsSource="{Binding Members}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="11" Margin="10" Visibility="Collapsed"/>
         
     </Grid>
 </UserControl>
