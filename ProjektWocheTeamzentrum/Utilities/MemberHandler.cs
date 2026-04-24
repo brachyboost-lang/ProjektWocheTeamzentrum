@@ -23,7 +23,7 @@ namespace ProjektWocheTeamzentrum.Utilities
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Laden der Mitglieder: {ex.Message} \n\n Lade Standardmitglieder...", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error on Loading Members: {ex.Message} \n\n Loading Fallback Data...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 members.Add(new Admin("Team", "Admin", new int[] { 0, 1, 2, 3 }));
                 members.Add(new Member("LMU", "Member1", new int[] { 1 }));
                 members.Add(new Member("LMU", "Member2", new int[] { 1 }));

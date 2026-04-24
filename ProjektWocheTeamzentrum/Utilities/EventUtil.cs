@@ -17,5 +17,16 @@ namespace ProjektWocheTeamzentrum.Utilities
             JsonSerializer.Deserialize<List<Event>>(json)?.ForEach(e => events.Add(e));
             return events;
         }
+        public static async Task AddEventAsync(Event newEvent)
+        {
+            List<Event> events = await GetAllEventsAsync();
+            events.Add(newEvent);
+            await SaveEventsAsync(events);
+        }
+        public static async Task SaveEventsAsync(List<Event> events)
+        {
+            string json = JsonSerializer.Serialize(events, new JsonSerializerOptions { WriteIndented = true });
+            await File.WriteAllTextAsync("events.json", json);
+        }
     }
 }

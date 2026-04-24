@@ -18,8 +18,7 @@ namespace ProjektWocheTeamzentrum.Utilities
             List<CarClass> carClasses = new List<CarClass>();
             try
             {
-                string json = await File.ReadAllTextAsync("carClasses.json");
-                JsonSerializer.Deserialize<List<CarClass>>(json)?.ForEach(c => carClasses.Add(c));
+                await GetAllCarClassesAsync();
             }
             catch (Exception ex)
             {
@@ -167,9 +166,9 @@ namespace ProjektWocheTeamzentrum.Utilities
                 new Car("Porsche 911 GT3 R LMGT3"),
                 new Car("Lamborghini Huracán LMGT3 Evo2")
                     }
-                }; 
+                };
                 carClasses.Add(LMU_GT3);
-            
+
                 // --- LMP2 ---
                 CarClass LMU_LMP2 = new CarClass
                 {
@@ -368,7 +367,7 @@ namespace ProjektWocheTeamzentrum.Utilities
                 carClasses.Add(ACC_Cup);
                 SaveCars(carClasses);
 
-            ;
+                ;
             }
             return carClasses;
         }
@@ -376,6 +375,14 @@ namespace ProjektWocheTeamzentrum.Utilities
         {
             string jsonText = JsonSerializer.Serialize(cars);
             File.WriteAllText("cars.json", jsonText);
+        }
+        public static async Task<List<CarClass>> GetAllCarClassesAsync()
+        {
+            List<CarClass> carClass = new List<CarClass>();
+            string json = await File.ReadAllTextAsync("carClasses.json");
+            JsonSerializer.Deserialize<List<CarClass>>(json)?.ForEach(c => carClass.Add(c));
+            return carClass;
+
         }
     }
 }
