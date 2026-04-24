@@ -10,5 +10,8 @@ namespace ProjektWocheTeamzentrum.Models.Users
             : base(firstName, lastName, email, dateJoined, 5, simulationType)
         {
         }
+        public Guest(string firstName, string lastName, int[] simulationType) : base(firstName, lastName, 5, simulationType)
+        {
+        }
     }
 }

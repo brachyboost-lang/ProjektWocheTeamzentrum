@@ -15,10 +15,11 @@ namespace ProjektWocheTeamzentrum.Models.Users
         public DateOnly Birthday { get; set; }
         public int ClearanceLevel { get; set; } = 0;
         public int[] SimulationType { get; set; }
+        public int idHandler { get; set; } = MemberHandler.GetAllMembersAsync().Result.Count + 1; // wird später durch datenbank mit auto increment ersetzt
 
         public User(string firstName, string lastName, string email, DateOnly birthday, int clearanceLevel, int[] simulationType)
         {
-            Id = MemberHandler.GetAllMembersAsync().Result.Count + 1; // wird später durch datenbank mit auto increment ersetzt
+            Id = idHandler; // wird später durch datenbank mit auto increment ersetzt
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -26,6 +27,17 @@ namespace ProjektWocheTeamzentrum.Models.Users
             Birthday = birthday;
             ClearanceLevel = clearanceLevel;
             SimulationType = simulationType;
+            MemberHandler.AddMember(this);
+        }
+        public User(string firstName, string lastName, int clearanceLevel, int[] simulationType)
+        {
+            Id = idHandler; // wird später durch datenbank mit auto increment ersetzt
+            FirstName = firstName;
+            LastName = lastName;
+            DateJoined = DateOnly.FromDateTime(DateTime.Now);
+            ClearanceLevel = clearanceLevel;
+            SimulationType = simulationType;
+            MemberHandler.AddMember(this);
         }
 
     }

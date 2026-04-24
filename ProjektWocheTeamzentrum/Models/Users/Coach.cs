@@ -10,5 +10,8 @@ namespace ProjektWocheTeamzentrum.Models.Users
             : base(firstName, lastName, email, dateJoined, 70, simulationType)
         {
         }
+        public Coach(string firstName, string lastName, int[] simulationType) : base(firstName, lastName, 70, simulationType)
+        {
+        }
     }
 }
