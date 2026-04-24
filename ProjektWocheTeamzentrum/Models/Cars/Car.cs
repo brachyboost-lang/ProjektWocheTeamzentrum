@@ -10,5 +10,15 @@ namespace ProjektWocheTeamzentrum.Models.Cars
         public string Constructor { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty; // alternativ falls damit einfacher umzugehen ist
+
+        public Car(string name)
+        { 
+            Name = name; 
+        }
+        public Car(string constructor, string model) 
+        {
+            Constructor = constructor;
+            Model = model;
+        }
     }
 }
