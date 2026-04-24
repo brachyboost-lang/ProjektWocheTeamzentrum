@@ -15,11 +15,12 @@ namespace ProjektWocheTeamzentrum.Models.Users
         public DateOnly Birthday { get; set; }
         public int ClearanceLevel { get; set; } = 0;
         public int[] SimulationType { get; set; }
-        public int idHandler { get; set; } = MemberHandler.GetAllMembersAsync().Result.Count + 1; // wird später durch datenbank mit auto increment ersetzt
+        // Do not call async methods synchronously in property initializers or constructors.
+        // Id will be assigned when the user is persisted.
 
         public User(string firstName, string lastName, string email, DateOnly birthday, int clearanceLevel, int[] simulationType)
         {
-            Id = idHandler; // wird später durch datenbank mit auto increment ersetzt
+            Id = 0; // placeholder until persisted
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -27,17 +28,17 @@ namespace ProjektWocheTeamzentrum.Models.Users
             Birthday = birthday;
             ClearanceLevel = clearanceLevel;
             SimulationType = simulationType;
-            MemberHandler.AddMember(this);
+            // Do not add the user to storage in the constructor to avoid IO side effects during object creation.
         }
         public User(string firstName, string lastName, int clearanceLevel, int[] simulationType)
         {
-            Id = idHandler; // wird später durch datenbank mit auto increment ersetzt
+            Id = 0; // placeholder until persisted
             FirstName = firstName;
             LastName = lastName;
             DateJoined = DateOnly.FromDateTime(DateTime.Now);
             ClearanceLevel = clearanceLevel;
             SimulationType = simulationType;
-            MemberHandler.AddMember(this);
+            // Do not add the user to storage in the constructor to avoid IO side effects during object creation.
         }
 
     }

@@ -32,5 +32,10 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 MessageBoxResult result = MessageBox.Show(ex.Message, "Error", messageBoxButton);
             }
         }
+        public MembermanagmentVM()
+        {
+            // Start initialization without blocking the UI thread. Waiting synchronously causes a deadlock in WPF.
+            _ = InitializeMembersAsync();
+        }
     }
 }

@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjektWocheTeamzentrum.Views;
+using ProjektWocheTeamzentrum.ViewModels;
 
 namespace ProjektWocheTeamzentrum
 {
@@ -24,11 +26,15 @@ namespace ProjektWocheTeamzentrum
         public void EventUC_Click(object sender, RoutedEventArgs e)
         {
             // TODO: switch to Events view
+
+
+
         }
 
         public void UsermanagmentUC_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: switch to User management view
+            MembermanagmentVM membermanagmentVM = new MembermanagmentVM();
+            MainContentControl.Content = new MembermanagmentUC { DataContext = membermanagmentVM };
         }
 
         public void CoachingUC_Click(object sender, RoutedEventArgs e)

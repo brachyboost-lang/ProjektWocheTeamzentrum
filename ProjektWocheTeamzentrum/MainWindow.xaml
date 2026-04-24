@@ -23,5 +23,6 @@
                 
             </Grid>
         </DockPanel>
+        <ContentControl x:Name="MainContentControl" Margin="10" Content=""/>
     </StackPanel> 
 </Window>

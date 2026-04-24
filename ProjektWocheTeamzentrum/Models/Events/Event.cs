@@ -15,10 +15,12 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public int DurationInMinutes { get; set; }
         public string MeetingLocation { get; set; } = string.Empty;
         public int RequiredClearanceLevel { get; set; } = 0;
+        public int IdHandler { get; set; } = 0;
 
         public Event(DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel)
         {
-            EventId = EventUtil.GetAllEventsAsync().Result.Count + 1; //temporär, wird später durch Datenbank mit auto increment ersetzt
+            IdHandler++;
+            EventId = IdHandler; 
             StartingTime = startingTime;
             Name = name;
             DurationInMinutes = durationInMinutes;
