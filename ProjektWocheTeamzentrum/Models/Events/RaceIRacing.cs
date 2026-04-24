@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjektWocheTeamzentrum.Models.Events
 {
-    public class EnduranceIracing : Race
+    class RaceIRacing
     {
     }
 }

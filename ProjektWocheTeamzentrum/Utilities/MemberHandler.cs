@@ -1,4 +1,4 @@
-﻿using ProjektWocheTeamzentrum.Models.User;
+﻿using ProjektWocheTeamzentrum.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;

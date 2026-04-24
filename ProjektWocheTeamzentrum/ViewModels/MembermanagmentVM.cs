@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ProjektWocheTeamzentrum.Models.User;
+using ProjektWocheTeamzentrum.Models.Users;
 using ProjektWocheTeamzentrum.Utilities;
 
 namespace ProjektWocheTeamzentrum.ViewModels

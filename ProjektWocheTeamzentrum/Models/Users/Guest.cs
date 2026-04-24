@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjektWocheTeamzentrum.Models.User
+namespace ProjektWocheTeamzentrum.Models.Users
 {
     public class Guest : User
     {
