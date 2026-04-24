@@ -6,5 +6,7 @@ namespace ProjektWocheTeamzentrum.Models.Events
 {
     public class Event
     {
+        public DateTime dateTime;
+        public string name;
     }
 }
