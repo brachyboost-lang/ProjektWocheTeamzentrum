@@ -75,11 +75,11 @@
             <TextBox Grid.Column="0" Grid.Row="0" x:Name="EventNameTextBox" Width="400" Height="20" Margin="22,25,98,405" Text="Event Name"/>
             <TextBox Grid.Column="0" Grid.Row="0" x:Name="EventDescriptionTextBox" Width="200" Height="40" Margin="22,52,298,358" Text="Event Description"/>
             <TextBox Grid.Column="0" Grid.Row="0" x:Name="EventLocationTextBox" Width="200" Height="40" Margin="22,97,298,313" Text="Event Location"/>
-            <RadioButton x:Name="SimulationTypeRadioButton" Tag="All" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="All" Margin="244,57,-244,373"/>
-            <RadioButton x:Name="SimulationTypeRadioButton2" Tag="LMU" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="Le Mans Ultimate" Margin="244,77,-244,353"/>
-            <RadioButton x:Name="SimulationTypeRadioButton3" Tag="ACC" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="Assetto Corsa Competizione" Margin="244,97,-244,333"/>
-            <RadioButton x:Name="SimulationTypeRadioButton4" Tag="IR" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="iRacing" Margin="244,117,-244,313"/>
-            <ContentControl x:Name="CarClassContentControl" Margin="22,296,16,10">
+            <RadioButton x:Name="SimulationTypeRadioButton" Tag="All" GroupName="SimulationType" Height="20" Content="All" Margin="244,57,-244,373"/>
+            <RadioButton x:Name="SimulationTypeRadioButton2" Tag="LMU" GroupName="SimulationType" Height="20" Content="Le Mans Ultimate" Margin="244,77,-244,353"/>
+            <RadioButton x:Name="SimulationTypeRadioButton3" Tag="ACC" GroupName="SimulationType" Height="20" Content="Assetto Corsa Competizione" Margin="244,97,-244,333"/>
+            <RadioButton x:Name="SimulationTypeRadioButton4" Tag="IR" GroupName="SimulationType" Height="20" Content="iRacing" Margin="244,117,-244,313"/>
+            <ContentControl x:Name="CarClassContentControl" Margin="22,142,298,288">
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">
                         <Style.Triggers>
