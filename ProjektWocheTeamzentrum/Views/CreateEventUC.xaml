@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="ProjektWocheTeamzentrum.Views.CreateEventUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ProjektWocheTeamzentrum.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
 
@@ -72,67 +72,56 @@
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7" Fill="LightGray" Margin="5,5,5,5"/>
         <Rectangle Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7" Fill="LightBlue" Margin="5,5,5,5"/>
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7">
-            <TextBox Grid.Column="0" Grid.Row="0" x:Name="EventNameTextBox" Width="400" Height="20" Margin="22,25,98,405" Text="Event Name"/>
-            <TextBox Grid.Column="0" Grid.Row="0" x:Name="EventDescriptionTextBox" Width="200" Height="40" Margin="22,52,298,358" Text="Event Description"/>
-            <TextBox Grid.Column="0" Grid.Row="0" x:Name="EventLocationTextBox" Width="200" Height="40" Margin="22,97,298,313" Text="Event Location"/>
-            <RadioButton x:Name="SimulationTypeRadioButton" Tag="All" GroupName="SimulationType" Height="20" Content="All" Margin="244,57,-244,373"/>
-            <RadioButton x:Name="SimulationTypeRadioButton2" Tag="LMU" GroupName="SimulationType" Height="20" Content="Le Mans Ultimate" Margin="244,77,-244,353"/>
-            <RadioButton x:Name="SimulationTypeRadioButton3" Tag="ACC" GroupName="SimulationType" Height="20" Content="Assetto Corsa Competizione" Margin="244,97,-244,333"/>
-            <RadioButton x:Name="SimulationTypeRadioButton4" Tag="IR" GroupName="SimulationType" Height="20" Content="iRacing" Margin="244,117,-244,313"/>
-            <ContentControl x:Name="CarClassContentControl" Margin="22,142,298,288">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton2}" Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <StackPanel>
-                                            <ToggleButton x:Name="LeMansUltimate_CarClass_LMP1_ToggleButton" Content="LMP1" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="LeMansUltimate_CarClass_LMP2_ToggleButton" Content="LMP2" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="LeMansUltimate_CarClass_GTE_ToggleButton" Content="GTE" Margin="0,0,0,10"/>
-                                        </StackPanel>
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton3}" Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <StackPanel>
-                                            <ToggleButton x:Name="ACC_CarClass_GT3_ToggleButton" Content="GT3" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="ACC_CarClass_GT4_ToggleButton" Content="GT4" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="ACC_CarClass_M2_ToggleButton" Content="M2" Margin="0,0,0,10"/>
-                                        </StackPanel>
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton4}" Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <StackPanel>
-                                            <ToggleButton x:Name="iRacing_CarClass_DTM_ToggleButton" Content="TCR" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="iRacing_CarClass_GT3_ToggleButton" Content="GT3" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="iRacing_CarClass_IndyCar_ToggleButton" Content="LMP2" Margin="0,0,0,10"/>
-                                        </StackPanel>
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton}" Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <StackPanel>
-                                            <ToggleButton x:Name="GermanTimeAttackMasters_ToggleButton" Content="German Time Attack Masters" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="Teamtreffen_ToggleButton" Content="Teamtreffen" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="RennenZuschauen_ToggleButton" Content="Rennen (Zuschauen)" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="Meeting_ToggleButton" Content="Meeting" Margin="0,0,0,10"/>
-                                            <ToggleButton x:Name="Empty_ToggleButton" Content="" Margin="0,0,0,10"/>
-                                        </StackPanel>
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>
+            <DockPanel Margin="22" LastChildFill="True">
+                <StackPanel DockPanel.Dock="Left" Width="420" Margin="0,0,20,0" HorizontalAlignment="Left">
+                    <TextBox x:Name="EventNameTextBox" Width="400" Height="24" Text="Event Name" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBox x:Name="EventDescriptionTextBox" Width="400" Height="60" Text="Event Description" Margin="0,0,0,8" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="EventLocationTextBox" Width="400" Height="24" Text="Event Location" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Top">
+                            <RadioButton x:Name="SimulationTypeRadioButton" Tag="All" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="All" Margin="0,0,0,8"/>
+                            <RadioButton x:Name="SimulationTypeRadioButton2" Tag="LMU" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="Le Mans Ultimate" Margin="0,0,0,8"/>
+                            <RadioButton x:Name="SimulationTypeRadioButton3" Tag="ACC" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="Assetto Corsa Competizione" Margin="0,0,0,8"/>
+                            <RadioButton x:Name="SimulationTypeRadioButton4" Tag="IR" GroupName="SimulationType" Checked="Radio_Checked" Height="20" Content="iRacing"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
+                        <DatePicker x:Name="EventDatePicker" Width="200"/>
+                        <ComboBox x:Name="TimeComboBox" Width="120" Margin="8,0,0,0">
+                            <ComboBoxItem Content="00:00"/>
+                            <ComboBoxItem Content="01:00"/>
+                            <ComboBoxItem Content="02:00"/>
+                            <ComboBoxItem Content="03:00"/>
+                            <ComboBoxItem Content="04:00"/>
+                            <ComboBoxItem Content="05:00"/>
+                            <ComboBoxItem Content="06:00"/>
+                            <ComboBoxItem Content="07:00"/>
+                            <ComboBoxItem Content="08:00"/>
+                            <ComboBoxItem Content="09:00"/>
+                            <ComboBoxItem Content="10:00"/>
+                            <ComboBoxItem Content="11:00"/>
+                            <ComboBoxItem Content="12:00"/>
+                            <ComboBoxItem Content="13:00"/>
+                            <ComboBoxItem Content="14:00"/>
+                            <ComboBoxItem Content="15:00"/>
+                            <ComboBoxItem Content="16:00"/>
+                            <ComboBoxItem Content="17:00"/>
+                            <ComboBoxItem Content="18:00"/>
+                            <ComboBoxItem Content="19:00"/>
+                            <ComboBoxItem Content="20:00"/>
+                            <ComboBoxItem Content="21:00"/>
+                            <ComboBoxItem Content="22:00"/>
+                            <ComboBoxItem Content="23:00"/>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
         </Grid>
     </Grid>
 </UserControl>
