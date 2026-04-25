@@ -18,9 +18,32 @@ namespace ProjektWocheTeamzentrum.Views
     /// </summary>
     public partial class CreateEventUC : UserControl
     {
+        public string SelectedSimulation { get; set; } = string.Empty;
         public CreateEventUC()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+        private void Radio_Checked(object sender, RoutedEventArgs e)
+        {
+            var rb = sender as RadioButton;
+            SelectedSimulation = rb.Tag?.ToString() ?? string.Empty;
+
+            switch (SelectedSimulation)
+            {
+                case "All":
+                    CarClassContentControl.ContentTemplate = (DataTemplate)Resources["AllTemplate"];
+                    break;
+                case "LMU":
+                    CarClassContentControl.ContentTemplate = (DataTemplate)Resources["LMUTemplate"];
+                    break;
+                case "ACC":
+                    CarClassContentControl.ContentTemplate = (DataTemplate)Resources["ACCTemplate"];
+                    break;
+                case "IR":
+                    CarClassContentControl.ContentTemplate = (DataTemplate)Resources["iRacingTemplate"];
+                    break;
+            }
         }
     }
 }
