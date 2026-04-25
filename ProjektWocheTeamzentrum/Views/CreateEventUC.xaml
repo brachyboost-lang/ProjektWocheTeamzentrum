@@ -39,8 +39,60 @@
             <RadioButton x:Name="SimulationTypeRadioButton2" Height="20" Content="Le Mans Ultimate" Margin="244,77,-244,353"/>
             <RadioButton x:Name="SimulationTypeRadioButton3" Height="20" Content="Assetto Corsa Competizione" Margin="244,97,-244,333"/>
             <RadioButton x:Name="SimulationTypeRadioButton4" Height="20" Content="iRacing" Margin="244,117,-244,313"/>
-            <ToggleButton x:Name="PublicEventToggleButton" Content="GT3" Margin="22,142,298,288"/>
+            <ContentControl x:Name="CarClassContentControl" Margin="22,142,298,288">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton2}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <StackPanel>
+                                            <ToggleButton x:Name="LeMansUltimate_CarClass_LMP1_ToggleButton" Content="LMP1" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="LeMansUltimate_CarClass_LMP2_ToggleButton" Content="LMP2" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="LeMansUltimate_CarClass_GTE_ToggleButton" Content="GTE" Margin="0,0,0,10"/>
+                                        </StackPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton3}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <StackPanel>
+                                            <ToggleButton x:Name="ACC_CarClass_GT3_ToggleButton" Content="GT3" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="ACC_CarClass_GT4_ToggleButton" Content="GT4" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="ACC_CarClass_M2_ToggleButton" Content="M2" Margin="0,0,0,10"/>
+                                        </StackPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton4}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <StackPanel>
+                                            <ToggleButton x:Name="iRacing_CarClass_DTM_ToggleButton" Content="TCR" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="iRacing_CarClass_GT3_ToggleButton" Content="GT3" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="iRacing_CarClass_IndyCar_ToggleButton" Content="LMP2" Margin="0,0,0,10"/>
+                                        </StackPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=SimulationTypeRadioButton}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <StackPanel>
+                                            <ToggleButton x:Name="GermanTimeAttackMasters_ToggleButton" Content="German Time Attack Masters" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="Teamtreffen_ToggleButton" Content="Teamtreffen" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="RennenZuschauen_ToggleButton" Content="Rennen (Zuschauen)" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="Meeting_ToggleButton" Content="Meeting" Margin="0,0,0,10"/>
+                                            <ToggleButton x:Name="Empty_ToggleButton" Content="" Margin="0,0,0,10"/>
+                                        </StackPanel>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
         </Grid>
-
     </Grid>
 </UserControl>
