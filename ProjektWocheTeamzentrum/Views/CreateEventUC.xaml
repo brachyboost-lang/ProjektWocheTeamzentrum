@@ -93,34 +93,53 @@
                     </Grid>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
                         <DatePicker x:Name="EventDatePicker" Width="200"/>
-                        <ComboBox x:Name="TimeComboBox" Width="120" Margin="8,0,0,0">
-                            <ComboBoxItem Content="00:00"/>
-                            <ComboBoxItem Content="01:00"/>
-                            <ComboBoxItem Content="02:00"/>
-                            <ComboBoxItem Content="03:00"/>
-                            <ComboBoxItem Content="04:00"/>
-                            <ComboBoxItem Content="05:00"/>
-                            <ComboBoxItem Content="06:00"/>
-                            <ComboBoxItem Content="07:00"/>
-                            <ComboBoxItem Content="08:00"/>
-                            <ComboBoxItem Content="09:00"/>
-                            <ComboBoxItem Content="10:00"/>
-                            <ComboBoxItem Content="11:00"/>
-                            <ComboBoxItem Content="12:00"/>
-                            <ComboBoxItem Content="13:00"/>
-                            <ComboBoxItem Content="14:00"/>
-                            <ComboBoxItem Content="15:00"/>
-                            <ComboBoxItem Content="16:00"/>
-                            <ComboBoxItem Content="17:00"/>
-                            <ComboBoxItem Content="18:00"/>
-                            <ComboBoxItem Content="19:00"/>
-                            <ComboBoxItem Content="20:00"/>
-                            <ComboBoxItem Content="21:00"/>
-                            <ComboBoxItem Content="22:00"/>
-                            <ComboBoxItem Content="23:00"/>
+                        <Label Content="Start Time:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <ComboBox x:Name="HoursComboBox" Width="50" Margin="0,0,0,0">
+                            <ComboBoxItem Content="00"/>
+                            <ComboBoxItem Content="01"/>
+                            <ComboBoxItem Content="02"/>
+                            <ComboBoxItem Content="03"/>
+                            <ComboBoxItem Content="04"/>
+                            <ComboBoxItem Content="05"/>
+                            <ComboBoxItem Content="06"/>
+                            <ComboBoxItem Content="07"/>
+                            <ComboBoxItem Content="08"/>
+                            <ComboBoxItem Content="09"/>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="11"/>
+                            <ComboBoxItem Content="12"/>
+                            <ComboBoxItem Content="13"/>
+                            <ComboBoxItem Content="14"/>
+                            <ComboBoxItem Content="15"/>
+                            <ComboBoxItem Content="16"/>
+                            <ComboBoxItem Content="17"/>
+                            <ComboBoxItem Content="18"/>
+                            <ComboBoxItem Content="19"/>
+                            <ComboBoxItem Content="20"/>
+                            <ComboBoxItem Content="21"/>
+                            <ComboBoxItem Content="22"/>
+                            <ComboBoxItem Content="23"/>
+                           </ComboBox>
+                        <Label Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <ComboBox x:Name="MinutesComboBox" Width="50" Margin="0,0,0,0">
+                            <ComboBoxItem Content="00"/>
+                            <ComboBoxItem Content="15"/>
+                            <ComboBoxItem Content="30"/>
+                            <ComboBoxItem Content="45"/>
                         </ComboBox>
-        <ContentControl x:Name="CarClassContentControl" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="16"   />
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
+                    <Label Content="Duration:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox x:Name="DurationTextBox" HorizontalAlignment="Left" Width="80" Margin="8,0,0,0" Text="(minutes)"/>
+                        <Label Content="Participants:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <ComboBox x:Name="ParticipantsComboBox" Width="80" Margin="8,0,0,0">
+                            <ComboBoxItem Content="Leaders"/>
+                            <ComboBoxItem Content="Coach"/>
+                            <ComboBoxItem Content="Members"/>
+                            <ComboBoxItem Content="Everyone"/>
+                        </ComboBox>
+                    </StackPanel>
+                        <ContentControl x:Name="CarClassContentControl" Margin="16"   />
                 </StackPanel>
             </DockPanel>
         </Grid>
