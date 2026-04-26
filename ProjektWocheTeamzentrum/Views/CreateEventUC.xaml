@@ -119,6 +119,7 @@
                             <ComboBoxItem Content="22:00"/>
                             <ComboBoxItem Content="23:00"/>
                         </ComboBox>
+        <ContentControl x:Name="CarClassContentControl" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="16"   />
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
