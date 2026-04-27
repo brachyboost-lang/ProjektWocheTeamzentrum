@@ -9,6 +9,7 @@ namespace ProjektWocheTeamzentrum.Models.Cars
         public string Name { get; set; } = string.Empty;
         public List<Car> Cars { get; set; } = new List<Car>();
         public int SimulationType { get; set; }
+        public bool IsSelected { get; set; }
 
     }
 }

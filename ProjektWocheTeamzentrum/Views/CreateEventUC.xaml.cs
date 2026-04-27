@@ -23,7 +23,7 @@ namespace ProjektWocheTeamzentrum.Views
         public CreateEventUC()
         {
             InitializeComponent();
-            DataContext = new EventVM(); 
+            DataContext = new EventVM();
         }
         private void SimulationRadio_Checked(object sender, RoutedEventArgs e)
         {
@@ -45,6 +45,10 @@ namespace ProjektWocheTeamzentrum.Views
                     CarClassContentControl.ContentTemplate = (DataTemplate)Resources["iRacingTemplate"];
                     break;
             }
+        }
+        private void AddCarClass_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

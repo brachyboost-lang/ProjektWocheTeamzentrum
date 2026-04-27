@@ -54,51 +54,89 @@
         
         <DataTemplate x:Key="AllTemplate">
             <StackPanel>
-                <ToggleButton Content="German Time Attack Masters" Margin="0,0,0,10"/>
-                <ToggleButton Content="Teamtreffen" Margin="0,0,0,10"/>
-                <ToggleButton Content="Rennen (Zuschauen)" Margin="0,0,0,10"/>
-                <ToggleButton Content="Meeting" Margin="0,0,0,10"/>
-                <ToggleButton Content="Gruppen Coaching" Margin="0,0,0,10"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+      MaxHeight="200">
+
+                    <ItemsControl ItemsSource="{Binding TeamEvents}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <ToggleButton Content="{Binding Name}"
+                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                      Margin="0,0,0,10"/>
+                                    <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </ScrollViewer>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="LMUTemplate">
             <StackPanel>
-                <ToggleButton Content="LMP3" Margin="0,0,0,10"/>
-                <ToggleButton Content="LMP2" Margin="0,0,0,10"/>
-                <ToggleButton Content="GT3" Margin="0,0,0,10"/>
-                <ToggleButton Content="GTE" Margin="0,0,0,10"/>
-                <ToggleButton Content="Hypercar" Margin="0,0,0,10"/>
-                <ContentControl x:Name="RaceContentControl" Margin="16"/>
-                
+                <ScrollViewer  VerticalScrollBarVisibility="Auto"
+      MaxHeight="200">
+
+                <ItemsControl ItemsSource="{Binding LMUCarClasses}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <ToggleButton Content="{Binding Name}"
+                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                      Margin="0,0,0,10"/>
+                                <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                </ScrollViewer>
             </StackPanel>
         </DataTemplate>
 
         <!-- ACC -->
         <DataTemplate x:Key="ACCTemplate">
-            <StackPanel>
-                <ToggleButton Content="GT3" Margin="0,0,0,10"/>
-                <ToggleButton Content="GT4" Margin="0,0,0,10"/>
-                <ToggleButton Content="M2" Margin="0,0,0,10"/>
-                <ToggleButton Content="ST/Challenge" Margin="0,0,0,10"/>
-                <ToggleButton Content="Cup" Margin="0,0,0,10"/>
-                <ToggleButton Content="GT2" Margin="0,0,0,10"/>
-                <ContentControl x:Name="RaceContentControl" Margin="16"/>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  MaxHeight="200">
+
+                <ItemsControl ItemsSource="{Binding ACCCarClasses}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <ToggleButton Content="{Binding Name}"
+                                  IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                  Margin="0,0,0,10"/>
+                                <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </ScrollViewer>
         </DataTemplate>
 
         <!-- IRACING -->
         <DataTemplate x:Key="iRacingTemplate">
             <StackPanel>
-                <ToggleButton Content="TCR" Margin="0,0,0,10"/>
-                <ToggleButton Content="GT3" Margin="0,0,0,10"/>
-                <ToggleButton Content="LMP2" Margin="0,0,0,10"/>
-                <ToggleButton Content="M2" Margin="0,0,0,10"/>
-                <ToggleButton Content="GTP" Margin="0,0,0,10"/>
-                <ToggleButton Content="LMP1" Margin="0,0,0,10"/>
-                <ToggleButton Content="GT4" Margin="0,0,0,10"/>
-                <ToggleButton Content="Cup" Margin="0,0,0,10"/>
-                <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+      MaxHeight="200">
+
+                    <ItemsControl ItemsSource="{Binding IRCarClasses}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <ToggleButton Content="{Binding Name}"
+                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                      Margin="0,0,0,10"/>
+                                    <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </ScrollViewer>
             </StackPanel>
         </DataTemplate>
 
@@ -202,6 +240,9 @@
                         <Button Content="Create Event" Click="CreateEvent_Click" Width="120"/>
                         <Button Content="Cancel" Click="Cancel_Click" Width="120" Margin="8,0,0,0"/>
                     </StackPanel>
+                    <ListBox ItemsSource="{Binding SelectedCarClasses}"
+         DisplayMemberPath="Name"
+         Width="200"/>
                 </StackPanel>
             </DockPanel>
         </Grid>
