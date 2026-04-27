@@ -20,8 +20,8 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public string BroadcastLink { get; set; } = string.Empty;
         public Race(List<CarClass> carClasses, string track, int simulationType, int maximumParticipants, int driversPerCar, 
             bool isEndurance, bool isEsports, bool isLeague, bool isBroadcasted, string broadcastLink, 
-            DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel)
-            : base(startingTime, name, durationInMinutes, meetingLocation, requiredClearanceLevel)
+            DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel, string description)
+            : base(startingTime, name, durationInMinutes, meetingLocation, requiredClearanceLevel, description)
         {
             CarClasses = carClasses;
             Track = track;

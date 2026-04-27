@@ -17,8 +17,8 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public int RequiredClearanceLevel { get; set; } = 0;
         public int IdHandler { get; set; } = 0;
         public List<User> VisibleToUsers { get; set; } = new List<User>();
-
-        public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel)
+        public string Description { get; set; } = string.Empty;
+        public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel, string description)
         {
             IdHandler++;
             EventId = IdHandler; 

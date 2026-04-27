@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
-    public class BaseVM : System.ComponentModel.INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
-        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

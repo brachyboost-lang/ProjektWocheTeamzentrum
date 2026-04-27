@@ -34,19 +34,28 @@
 
         <DataTemplate x:Key="RaceTemplate">
             <StackPanel>
-                <StackPanel>
-                    <RadioButton Content="Livestream" GroupName="rbIsLivestreamed" Checked="Broadcast_Checked" Margin="0,0,0,10"/>
-                    <ContentControl x:Name="LivestreamContentControl" Margin="16"/>
-                </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <RadioButton Content="League" GroupName="rbIsLeague" Checked="League_Checked" Margin="0,0,0,10"/>
-                    <ContentControl x:Name="LeagueContentControl" Margin="16"/>
+                    <TextBox x:Name="TrackTextBox" Text="{Binding Track, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="24" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                    <StackPanel Margin="8,0,0,0">
+                        <RadioButton Content="Livestream" GroupName="rbIsLivestreamed" IsChecked="{Binding IsBroadcasted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                        <ContentControl x:Name="LivestreamContentControl" Margin="0,0,0,0"/>
+                    </StackPanel>
                 </StackPanel>
+
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <RadioButton Content="Max. Participants" Checked="MaxParticipants_Checked" GroupName="rbMaxParticipants" Margin="0,0,0,10"/>
-                    <ContentControl x:Name="MaxParticipantsContentControl" Margin="16"/>
-                    <RadioButton Content="Max. Drivers per Car" Checked="MaxDriversPerCar_Checked" GroupName="rbMaxDriversPerCar" Margin="0,0,0,10"/>
-                    <ContentControl x:Name="MaxDriversPerCarContentControl" Margin="16"/>
+                    <RadioButton Content="Endurance" GroupName="rbIsEndurance" IsChecked="{Binding IsEndurance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                    <RadioButton Content="League" GroupName="rbIsLeague" IsChecked="{Binding IsLeague, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,10"/>
+                    <ContentControl x:Name="LeagueContentControl" Margin="16,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <RadioButton Content="E-Sport" GroupName="rbIsEsport" IsChecked="{Binding IsEsports, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                        <RadioButton Content="Max. Participants" Checked="MaxParticipants_Checked" GroupName="rbMaxParticipants" Margin="0,0,0,10"/>
+                        <ContentControl x:Name="MaxParticipantsContentControl" Margin="8,0,0,0"/>
+                        <RadioButton Content="Max. Drivers per Car" Checked="MaxDriversPerCar_Checked" GroupName="rbMaxDriversPerCar" Margin="8,0,0,0"/>
+                        <ContentControl x:Name="MaxDriversPerCarContentControl" Margin="8,0,0,0"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -171,7 +180,7 @@
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7">
             <DockPanel Margin="22" LastChildFill="True">
                 <StackPanel DockPanel.Dock="Left" Width="420" Margin="0,0,20,0" HorizontalAlignment="Left">
-                    <TextBox x:Name="EventNameTextBox" Width="400" Height="24" Text="Event Name" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="EventNameTextBox" Width="400" Height="24" Text="{Binding Description}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
                     <Grid Margin="0,0,0,8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -189,9 +198,9 @@
                         </StackPanel>
                     </Grid>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
-                        <DatePicker x:Name="EventDatePicker" Width="200"/>
+                        <DatePicker x:Name="EventDatePicker" Width="200" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="Start Time:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <ComboBox x:Name="HoursComboBox" Width="50" Margin="0,0,0,0">
+                        <ComboBox x:Name="HoursComboBox" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedHour, Mode=TwoWay}">
                             <ComboBoxItem Content="00"/>
                             <ComboBoxItem Content="01"/>
                             <ComboBoxItem Content="02"/>
@@ -218,7 +227,7 @@
                             <ComboBoxItem Content="23"/>
                         </ComboBox>
                         <Label Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <ComboBox x:Name="MinutesComboBox" Width="50" Margin="0,0,0,0">
+                        <ComboBox x:Name="MinutesComboBox" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedMinuteIndex, Mode=TwoWay}">
                             <ComboBoxItem Content="00"/>
                             <ComboBoxItem Content="15"/>
                             <ComboBoxItem Content="30"/>
