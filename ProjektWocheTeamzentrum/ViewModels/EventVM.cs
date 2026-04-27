@@ -11,7 +11,7 @@ using System.Windows.Documents;
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
-    public class EventVM
+    public class EventVM : BaseVM
     {
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
         public List<User> RegisteredParticipants { get; set; } = new List<User>();

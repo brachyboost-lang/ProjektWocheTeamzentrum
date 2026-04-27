@@ -9,7 +9,7 @@ using ProjektWocheTeamzentrum.Utilities;
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
-    public class MembermanagmentVM
+    public class MembermanagmentVM : BaseVM
     {
         public ObservableCollection<User> Members { get; set; } = new ObservableCollection<User>();
         public string Name { get; set; } = string.Empty;
