@@ -24,7 +24,7 @@ namespace ProjektWocheTeamzentrum.Views
             InitializeComponent();
             DataContext = this;
         }
-        private void Radio_Checked(object sender, RoutedEventArgs e)
+        private void SimulationRadio_Checked(object sender, RoutedEventArgs e)
         {
             var rb = sender as RadioButton;
             SelectedSimulation = rb.Tag?.ToString() ?? string.Empty;
