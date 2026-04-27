@@ -178,7 +178,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <TextBox x:Name="EventDescriptionTextBox" Width="400" Height="60" Text="Event Description" Margin="0,0,0,8" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="EventLocationTextBox" Width="400" Height="24" Text="Event Location" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="EventLocationTextBox" Width="400" Height="24" Text="{Binding Location}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Top">
                             <RadioButton x:Name="SimulationTypeRadioButton" Tag="All" GroupName="SimulationType" Checked="SimulationRadio_Checked" Height="20" Content="All" Margin="0,0,0,8"/>

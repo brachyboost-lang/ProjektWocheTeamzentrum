@@ -23,7 +23,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public DateTime StartingTime { get; set; }
         public string Name { get; set; } = "Name";
         public int DurationInMinutes { get; set; }
-        public string MeetingLocation { get; set; } = "Meeting Location";
+        public string EventLocation { get; set; } = "Event Location";
         public int RequiredClearanceLevel { get; set; } = 0;
         public int IdHandler { get; set; } = 0;
         public int MaxParticipants { get; set; } = 0;

@@ -13,19 +13,19 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public DateTime StartingTime { get; set; }
         public string Name { get; set; } = string.Empty;
         public int DurationInMinutes { get; set; }
-        public string MeetingLocation { get; set; } = string.Empty;
+        public string EventLocation { get; set; } = string.Empty;
         public int RequiredClearanceLevel { get; set; } = 0;
         public int IdHandler { get; set; } = 0;
         public List<User> VisibleToUsers { get; set; } = new List<User>();
 
-        public Event(DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel)
+        public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel)
         {
             IdHandler++;
             EventId = IdHandler; 
             StartingTime = startingTime;
             Name = name;
             DurationInMinutes = durationInMinutes;
-            MeetingLocation = meetingLocation;
+            EventLocation = eventLocation;
             RequiredClearanceLevel = requiredClearanceLevel;
         }
     }
