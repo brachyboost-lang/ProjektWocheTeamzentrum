@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjektWocheTeamzentrum.ViewModels;
 
 namespace ProjektWocheTeamzentrum.Views
 {
@@ -22,7 +23,7 @@ namespace ProjektWocheTeamzentrum.Views
         public CreateEventUC()
         {
             InitializeComponent();
-            DataContext = this;
+            DataContext = new EventVM(); 
         }
         private void SimulationRadio_Checked(object sender, RoutedEventArgs e)
         {

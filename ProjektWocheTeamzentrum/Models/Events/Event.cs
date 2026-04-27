@@ -16,6 +16,7 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public string MeetingLocation { get; set; } = string.Empty;
         public int RequiredClearanceLevel { get; set; } = 0;
         public int IdHandler { get; set; } = 0;
+        public List<User> VisibleToUsers { get; set; } = new List<User>();
 
         public Event(DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel)
         {

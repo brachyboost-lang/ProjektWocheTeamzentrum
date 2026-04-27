@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjektWocheTeamzentrum.ViewModels;
 
 namespace ProjektWocheTeamzentrum.Views
 {
@@ -22,6 +23,7 @@ namespace ProjektWocheTeamzentrum.Views
         public MembermanagmentUC()
         {
             InitializeComponent();
+            DataContext = new MembermanagmentVM();
         }
 
         public void ViewMembers_Click(object sender, RoutedEventArgs e)

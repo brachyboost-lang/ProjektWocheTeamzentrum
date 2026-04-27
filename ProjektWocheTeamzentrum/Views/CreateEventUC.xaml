@@ -10,25 +10,25 @@
         
         <DataTemplate x:Key="LeagueTemplate">
             <StackPanel>
-                <TextBox x:Name="LeagueURLTextBox" Width="200" Height="24" Text="League (URL)" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                <TextBox x:Name="LeagueURLTextBox" Width="200" Height="24" Text="{Binding LeagueURL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
         
         <DataTemplate x:Key="LivestreamTemplate">
             <StackPanel>
-                <TextBox x:Name="LivestreamURLTextBox" Width="200" Height="24" Text="Stream (URL)" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                <TextBox x:Name="LivestreamURLTextBox" Width="200" Height="24" Text="{Binding BroadcastURL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MaxParticipantsTemplate">
             <StackPanel>
-                <TextBox x:Name="MaxParticipantsTextBox" Width="40" Height="24" Text="" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                <TextBox x:Name="MaxParticipantsTextBox" Width="40" Height="24" Text="{Binding MaxParticipants, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MaxDriversPerCarTemplate">
             <StackPanel>
-                <TextBox x:Name="MaxDriversPerCarTextBox" Width="40" Height="24" Text="" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                <TextBox x:Name="MaxDriversPerCarTextBox" Width="40" Height="24" Text="{Binding MaxDriversPerCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
 
@@ -43,9 +43,9 @@
                     <ContentControl x:Name="LeagueContentControl" Margin="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <RadioButton Content="Max. Participants" GroupName="rbMaxParticipants" Margin="0,0,0,10"/>
+                    <RadioButton Content="Max. Participants" Checked="MaxParticipants_Checked" GroupName="rbMaxParticipants" Margin="0,0,0,10"/>
                     <ContentControl x:Name="MaxParticipantsContentControl" Margin="16"/>
-                    <RadioButton Content="Max. Drivers per Car" GroupName="rbMaxDriversPerCar" Margin="0,0,0,10"/>
+                    <RadioButton Content="Max. Drivers per Car" Checked="MaxDriversPerCar_Checked" GroupName="rbMaxDriversPerCar" Margin="0,0,0,10"/>
                     <ContentControl x:Name="MaxDriversPerCarContentControl" Margin="16"/>
                 </StackPanel>
             </StackPanel>

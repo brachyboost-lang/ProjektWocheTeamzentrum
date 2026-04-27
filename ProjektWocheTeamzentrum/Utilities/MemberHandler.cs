@@ -6,6 +6,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace ProjektWocheTeamzentrum.Utilities
 {
@@ -32,13 +33,19 @@ namespace ProjektWocheTeamzentrum.Utilities
                 // If reading fails, fall back to default members
                 var fallback = CreateDefaultMembers();
                 try { await SaveMembersAsync(fallback); } catch { }
-                return fallback;
+                var fallbackList = new List<User>();
+                foreach (var member in fallback)
+                { fallbackList.Add(member); }
+                return fallbackList;
             }
 
             // file did not exist - create and return default members
             var defaults = CreateDefaultMembers();
             try { await SaveMembersAsync(defaults); } catch { }
-            return defaults;
+            var defaultsList = new List<User>();
+            foreach (var member in defaults)
+            { defaultsList.Add(member); }
+            return defaultsList;
         }
         public static async Task AddMemberAsync(User user)
         {
@@ -46,11 +53,15 @@ namespace ProjektWocheTeamzentrum.Utilities
             {
 
                 string path = GetMembersFilePath();
-                List<User> members = new List<User>();
+                ObservableCollection<User> members = new ObservableCollection<User>();
                 if (File.Exists(path))
                 {
                     string jsonText = await File.ReadAllTextAsync(path);
-                    members = JsonSerializer.Deserialize<List<User>>(jsonText) ?? new List<User>();
+                    var memberList = JsonSerializer.Deserialize<List<User>>(jsonText) ?? new List<User>();
+                    foreach (var member in memberList)
+                    {
+                        members.Add(member);
+                    }
                 }
 
                 members.Add(user);
@@ -58,17 +69,28 @@ namespace ProjektWocheTeamzentrum.Utilities
             }
             catch (Exception ex) 
             {
-                List<User> members = new List<User>();
+                try
+                {
+
+                ObservableCollection<User> members = new ObservableCollection<User>();
                 members.Add(user);
                 await SaveMembersAsync(members);
-                MessageBox.Show($"Error on Loading Members: {ex.Message} \n\n Loading Fallback Data...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch
+                {
+                        MessageBox.Show($"Error on Saving Members: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
+                }
             }
         }
-        public static async Task SaveMembersAsync(List<User> members)
+        public static async Task SaveMembersAsync(ObservableCollection<User> members)
         {
             try
             {
-                string jsonText = JsonSerializer.Serialize(members);
+                List<User> memberList = new List<User>();
+                foreach (var member in members)
+                { memberList.Add(member); }
+                string jsonText = JsonSerializer.Serialize(memberList);
                 string path = GetMembersFilePath();
                 string? dir = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
@@ -80,9 +102,9 @@ namespace ProjektWocheTeamzentrum.Utilities
             }
         }
 
-        private static List<User> CreateDefaultMembers()
+        private static ObservableCollection<User> CreateDefaultMembers()
         {
-            var members = new List<User>();
+            var members = new ObservableCollection<User>();
             members.Add(new Admin("Team", "Admin", new int[] { 0, 1, 2, 3 }));
             members.Add(new Member("LMU", "Member1", new int[] { 1 }));
             members.Add(new Member("LMU", "Member2", new int[] { 1 }));

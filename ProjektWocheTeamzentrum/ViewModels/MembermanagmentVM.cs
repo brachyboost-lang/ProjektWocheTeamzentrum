@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ProjektWocheTeamzentrum.Models.Users;
-using ProjektWocheTeamzentrum.Utilities;
+using ProjektWocheTeamzentrum.Utilities; 
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
     public class MembermanagmentVM : BaseVM
     {
         public ObservableCollection<User> Members { get; set; } = new ObservableCollection<User>();
+        public RelayCommand AddMemberCommand => new RelayCommand(execute => { }, canExecute => { return canAdd; });
         public string Name { get; set; } = string.Empty;
         public User SelectedMember { get; set; } = null!;
+        public User LoggedInUser { get; set; } = null!;
+        public bool canAdd { get => LoggedInUser.ClearanceLevel >= 90; }
 
         public async Task InitializeMembersAsync()
         {
@@ -36,6 +39,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         {
             // Start initialization without blocking the UI thread. Waiting synchronously causes a deadlock in WPF.
             _ = InitializeMembersAsync();
+
         }
     }
 }
