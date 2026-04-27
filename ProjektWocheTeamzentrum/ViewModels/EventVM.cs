@@ -23,7 +23,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public int RequiredClearanceLevel { get; set; } = 0;
         public int IdHandler { get; set; } = 0;
 
-        public async Task InitalizeEvents()
+        public async Task InitializeEvents()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         }
         public EventVM()
         {
-            _ = InitalizeEvents();
+            _ = InitializeEvents();
         }
     }
 }
