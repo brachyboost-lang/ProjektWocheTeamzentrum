@@ -21,6 +21,16 @@ namespace ProjektWocheTeamzentrum
         public MainWindow()
         {
             InitializeComponent();
+            var vm = new ViewModels.MainWindowVM();
+            DataContext = vm;
+            vm.RequestViewChange += Vm_RequestViewChange;
+            // show default view
+            vm.RequestViewChange?.Invoke(new ShowEventsUC { DataContext = new EventVM() });
+        }
+
+        private void Vm_RequestViewChange(UserControl? view)
+        {
+            MainContentControl.Content = view;
         }
 
         public void EventUC_Click(object sender, RoutedEventArgs e)

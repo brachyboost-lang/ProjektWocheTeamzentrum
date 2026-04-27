@@ -15,8 +15,6 @@ namespace ProjektWocheTeamzentrum.ViewModels
 {
     public class EventVM : BaseVM
     {
-        public RelayCommand AddEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent(); });
-        public RelayCommand DeleteEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent(); });
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
         public ObservableCollection<User> RegisteredParticipants { get; set; } = new ObservableCollection<User>();
         public int EventId { get; set; }
@@ -24,10 +22,11 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public string Name { get; set; } = "Name";
         public int DurationInMinutes { get; set; }
         public string EventLocation { get; set; } = "Event Location";
-        public int RequiredClearanceLevel { get; set; } = 0;
+        public int RequiredClearanceLevel { get; set; }
         public int IdHandler { get; set; } = 0;
         public int MaxParticipants { get; set; } = 0;
         public int MaxDriversPerCar { get; set; } = 0;
+        public string SelectedParticipants { get; set; } 
         public string Description { get; set; } = "Description";
         public string LeagueURL { get; set; } = "League URL";
         public string BroadcastURL { get; set; } = "Broadcast URL";
@@ -41,6 +40,8 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public ObservableCollection<CarClass> LMUCarClasses { get; set; } = new ObservableCollection<CarClass>();
         public ObservableCollection<CarClass> IRCarClasses { get; set; } = new ObservableCollection<CarClass>();
         public ObservableCollection<CarClass> TeamEvents { get; set; } = new ObservableCollection<CarClass>();
+        public RelayCommand AddEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent(); });
+        public RelayCommand DeleteEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent(); });
 
         public bool canEditEvent()
         {
@@ -68,9 +69,14 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
             }
         }
+        public async Task InitializeCarClasses()
+        {
+            await CarHandler.InitializeCarsAsync();
+        }
         public EventVM()
         {
             _ = InitializeEvents();
+            _ = InitializeCarClasses();
             CarClass TeamEvents = new CarClass
             {
                 Name = "Team Events",

@@ -46,9 +46,79 @@ namespace ProjektWocheTeamzentrum.Views
                     break;
             }
         }
-        private void AddCarClass_Click(object sender, RoutedEventArgs e)
+        private void Broadcast_Checked(object sender, RoutedEventArgs e)
         {
+            var rb = sender as RadioButton;
+            var cc = FindSiblingContentControl(rb, "LivestreamContentControl");
+            if (cc != null)
+                cc.ContentTemplate = (DataTemplate)Resources["LivestreamTemplate"];
+        }
 
+        private void League_Checked(object sender, RoutedEventArgs e)
+        {
+            var rb = sender as RadioButton;
+            var cc = FindSiblingContentControl(rb, "LeagueContentControl");
+            if (cc != null)
+                cc.ContentTemplate = (DataTemplate)Resources["LeagueTemplate"];
+        }
+
+        private void MaxParticipants_Checked(object sender, RoutedEventArgs e)
+        {
+            var rb = sender as RadioButton;
+            var cc = FindSiblingContentControl(rb, "MaxParticipantsContentControl");
+            if (cc != null)
+                cc.ContentTemplate = (DataTemplate)Resources["MaxParticipantsTemplate"];
+        }
+
+        private void MaxDriversPerCar_Checked(object sender, RoutedEventArgs e)
+        {
+            var rb = sender as RadioButton;
+            var cc = FindSiblingContentControl(rb, "MaxDriversPerCarContentControl");
+            if (cc != null)
+                cc.ContentTemplate = (DataTemplate)Resources["MaxDriversPerCarTemplate"];
+
+        }
+
+        private void CreateEvent_Click(object sender, RoutedEventArgs e)
+        {
+            // placeholder - wire into VM later
+            MessageBox.Show("Create event clicked");
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            // placeholder - clear fields or close
+            MessageBox.Show("Cancel clicked");
+        }
+
+        // Helper: search up the visual tree and find a ContentControl with the given name
+        private ContentControl FindSiblingContentControl(DependencyObject start, string controlName)
+        {
+            if (start == null || string.IsNullOrEmpty(controlName)) return null;
+
+            DependencyObject current = start;
+            while (current != null)
+            {
+                var found = FindContentControlIn(current, controlName);
+                if (found != null) return found;
+                current = VisualTreeHelper.GetParent(current);
+            }
+
+            return null;
+        }
+
+        private ContentControl FindContentControlIn(DependencyObject parent, string controlName)
+        {
+            if (parent == null) return null;
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                if (child is ContentControl cc && cc.Name == controlName) return cc;
+                var deeper = FindContentControlIn(child, controlName);
+                if (deeper != null) return deeper;
+            }
+            return null;
         }
     }
 }

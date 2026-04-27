@@ -16,10 +16,10 @@
                             <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Events" Click="EventUC_Click" Margin="10"/>
-                        <Button Grid.Column="1" Content="Usermanagment" Click="UsermanagmentUC_Click" Margin="10"/>
-                        <Button Grid.Column="2" Content="Coaching" Click="CoachingUC_Click" Margin="10"/>
-                    <Button Grid.Column="4" Content="Settings" Click="SettingsUC_Click" Margin="10"/>
+                <Button Grid.Column="0" Content="Events" Command="{Binding ShowEventsCommand}" Margin="10"/>
+                        <Button Grid.Column="1" Content="Usermanagment" Command="{Binding ShowUsermanagementCommand}" Margin="10"/>
+                        <Button Grid.Column="2" Content="Coaching" Command="{Binding ShowCoachingCommand}" Margin="10"/>
+                    <Button Grid.Column="4" Content="Settings" Command="{Binding ShowSettingsCommand}" Margin="10"/>
                 
             </Grid>
         </DockPanel>
