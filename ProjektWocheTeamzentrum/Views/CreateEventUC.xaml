@@ -253,7 +253,7 @@ Width="200"/>
                 </StackPanel>
             </DockPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Button Content="Create Event" Click="CreateEvent_Click" Width="120"/>
+                <Button Content="Create Event" Command="{Binding CreateEventCommand}" Width="120"/>
             </StackPanel>
         </Grid>
     </Grid>

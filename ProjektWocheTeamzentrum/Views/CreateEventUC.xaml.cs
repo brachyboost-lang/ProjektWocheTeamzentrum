@@ -23,7 +23,8 @@ namespace ProjektWocheTeamzentrum.Views
         public CreateEventUC()
         {
             InitializeComponent();
-            DataContext = new EventVM();
+            EventVM DC = new EventVM();
+            DataContext = DC;
         }
         private void SimulationRadio_Checked(object sender, RoutedEventArgs e)
         {
@@ -81,8 +82,6 @@ namespace ProjektWocheTeamzentrum.Views
 
         private void CreateEvent_Click(object sender, RoutedEventArgs e)
         {
-            // placeholder - wire into VM later
-            MessageBox.Show("Create event clicked");
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

@@ -89,6 +89,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public ObservableCollection<CarClass> IRCarClasses { get; set; } = new ObservableCollection<CarClass>();
         public ObservableCollection<CarClass> TeamEvents { get; set; } = new ObservableCollection<CarClass>();
         public ObservableCollection<CarClass> SelectedCarClasses { get; set; } = new ObservableCollection<CarClass>();
+        public Event SelectedEvent { get; set; }
         public string Location
         {
             get => EventLocation;
@@ -101,8 +102,8 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 }
             }
         }
-        public RelayCommand AddEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent(); });
-        public RelayCommand DeleteEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent(); });
+        public RelayCommand AddEventCommand => new RelayCommand(execute => { CreateEvent(); }, canExecute => { return canEditEvent(); });
+        public RelayCommand DeleteEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent() && SelectedEvent != null; });
 
         public bool canEditEvent()
         {
