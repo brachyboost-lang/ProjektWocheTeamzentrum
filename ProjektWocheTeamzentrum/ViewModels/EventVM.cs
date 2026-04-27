@@ -102,7 +102,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 }
             }
         }
-        public RelayCommand AddEventCommand => new RelayCommand(execute => { CreateEvent(); }, canExecute => { return canEditEvent(); });
+        public RelayCommand AddEventCommand => new RelayCommand(async execute => { await CreateEvent(); }, canExecute => { return canEditEvent(); });
         public RelayCommand DeleteEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent() && SelectedEvent != null; });
 
         public bool canEditEvent()
