@@ -36,11 +36,44 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public string Track { get; set; } = "Track";
         public int DurationInMinutes { get; set; }
         public string EventLocation { get; set; } = "Meeting Location";
-        public int RequiredClearanceLevel { get; set; }
+        private int _requiredClearanceLevel;
+        public int RequiredClearanceLevel
+        {
+            get => _requiredClearanceLevel;
+            set
+            {
+                if (_requiredClearanceLevel != value)
+                {
+                    _requiredClearanceLevel = value;
+                    OnPropertyChanged(nameof(RequiredClearanceLevel));
+                }
+            }
+        }
         public int IdHandler { get; set; } = 0;
         public int MaxParticipants { get; set; } = 0;
         public int MaxDriversPerCar { get; set; } = 0;
-        public string SelectedParticipants { get; set; }
+        private string _selectedParticipants = string.Empty;
+        public string SelectedParticipants
+        {
+            get => _selectedParticipants;
+            set
+            {
+                if (_selectedParticipants != value)
+                {
+                    _selectedParticipants = value;
+                    OnPropertyChanged(nameof(SelectedParticipants));
+                    // map selected participants to clearance level
+                    RequiredClearanceLevel = value?.ToLowerInvariant() switch
+                    {
+                        "leaders" => 80,
+                        "coach" => 60,
+                        "members" => 30,
+                        "everyone" => 5,
+                        _ => 5,
+                    };
+                }
+            }
+        }
         public string Description { get; set; } = "Description";
         public string LeagueURL { get; set; } = "League URL";
         public string BroadcastURL { get; set; } = "Broadcast URL";

@@ -18,15 +18,23 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public int IdHandler { get; set; } = 0;
         public List<User> VisibleToUsers { get; set; } = new List<User>();
         public string Description { get; set; } = string.Empty;
+
         public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel, string description)
         {
             IdHandler++;
-            EventId = IdHandler; 
+            EventId = IdHandler;
             StartingTime = startingTime;
             Name = name;
             DurationInMinutes = durationInMinutes;
             EventLocation = eventLocation;
             RequiredClearanceLevel = requiredClearanceLevel;
+            Description = description ?? string.Empty;
+        }
+
+        //backwards compatibility constructor without description parameter, faster than finding all usages right now, close to deadline
+        public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel)
+            : this(startingTime, name, durationInMinutes, eventLocation, requiredClearanceLevel, string.Empty)
+        {
         }
     }
 }

@@ -34,5 +34,13 @@ namespace ProjektWocheTeamzentrum.Models.Events
             IsBroadcasted = isBroadcasted;
             BroadcastLink = broadcastLink;
         }
+
+        // Backwards-compatible constructor without description
+        public Race(List<CarClass> carClasses, string track, int simulationType, int maximumParticipants, int driversPerCar,
+            bool isEndurance, bool isEsports, bool isLeague, bool isBroadcasted, string broadcastLink,
+            DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel)
+            : this(carClasses, track, simulationType, maximumParticipants, driversPerCar, isEndurance, isEsports, isLeague, isBroadcasted, broadcastLink, startingTime, name, durationInMinutes, meetingLocation, requiredClearanceLevel, string.Empty)
+        {
+        }
     }
 }
