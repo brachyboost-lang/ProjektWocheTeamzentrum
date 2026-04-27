@@ -10,13 +10,25 @@
         
         <DataTemplate x:Key="LeagueTemplate">
             <StackPanel>
-                <TextBox x:Name="LeagueURLTextBox" Width="400" Height="24" Text="League (URL)" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                <TextBox x:Name="LeagueURLTextBox" Width="200" Height="24" Text="League (URL)" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
         
         <DataTemplate x:Key="LivestreamTemplate">
             <StackPanel>
-                <TextBox x:Name="LivestreamURLTextBox" Width="400" Height="24" Text="Stream (URL)" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                <TextBox x:Name="LivestreamURLTextBox" Width="200" Height="24" Text="Stream (URL)" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MaxParticipantsTemplate">
+            <StackPanel>
+                <TextBox x:Name="MaxParticipantsTextBox" Width="40" Height="24" Text="" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MaxDriversPerCarTemplate">
+            <StackPanel>
+                <TextBox x:Name="MaxDriversPerCarTextBox" Width="40" Height="24" Text="" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
 
@@ -31,7 +43,10 @@
                     <ContentControl x:Name="LeagueContentControl" Margin="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <RadioButton Content="Max. Participants" Margin="0,0,0,10"/>
+                    <RadioButton Content="Max. Participants" GroupName="rbMaxParticipants" Margin="0,0,0,10"/>
+                    <ContentControl x:Name="MaxParticipantsContentControl" Margin="16"/>
+                    <RadioButton Content="Max. Drivers per Car" GroupName="rbMaxDriversPerCar" Margin="0,0,0,10"/>
+                    <ContentControl x:Name="MaxDriversPerCarContentControl" Margin="16"/>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -43,6 +58,7 @@
                 <ToggleButton Content="Teamtreffen" Margin="0,0,0,10"/>
                 <ToggleButton Content="Rennen (Zuschauen)" Margin="0,0,0,10"/>
                 <ToggleButton Content="Meeting" Margin="0,0,0,10"/>
+                <ToggleButton Content="Gruppen Coaching" Margin="0,0,0,10"/>
             </StackPanel>
         </DataTemplate>
 
@@ -67,6 +83,7 @@
                 <ToggleButton Content="ST/Challenge" Margin="0,0,0,10"/>
                 <ToggleButton Content="Cup" Margin="0,0,0,10"/>
                 <ToggleButton Content="GT2" Margin="0,0,0,10"/>
+                <ContentControl x:Name="RaceContentControl" Margin="16"/>
             </StackPanel>
         </DataTemplate>
 
@@ -81,6 +98,7 @@
                 <ToggleButton Content="LMP1" Margin="0,0,0,10"/>
                 <ToggleButton Content="GT4" Margin="0,0,0,10"/>
                 <ToggleButton Content="Cup" Margin="0,0,0,10"/>
+                <ContentControl x:Name="RaceContentControl" Margin="16"/>
             </StackPanel>
         </DataTemplate>
 
@@ -110,6 +128,7 @@
         </Grid.RowDefinitions>
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7" Fill="LightGray" Margin="5,5,5,5"/>
         <Rectangle Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7" Fill="LightBlue" Margin="5,5,5,5"/>
+        <ContentControl x:Name="ImageContentControl" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7" Margin="5,5,5,5"/>
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7">
             <DockPanel Margin="22" LastChildFill="True">
                 <StackPanel DockPanel.Dock="Left" Width="420" Margin="0,0,20,0" HorizontalAlignment="Left">
@@ -158,7 +177,7 @@
                             <ComboBoxItem Content="21"/>
                             <ComboBoxItem Content="22"/>
                             <ComboBoxItem Content="23"/>
-                           </ComboBox>
+                        </ComboBox>
                         <Label Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
                         <ComboBox x:Name="MinutesComboBox" Width="50" Margin="0,0,0,0">
                             <ComboBoxItem Content="00"/>
@@ -168,7 +187,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
-                    <Label Content="Duration:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label Content="Duration:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBox x:Name="DurationTextBox" HorizontalAlignment="Left" Width="80" Margin="8,0,0,0" Text="(minutes)"/>
                         <Label Content="Participants:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
                         <ComboBox x:Name="ParticipantsComboBox" Width="80" Margin="8,0,0,0">
@@ -178,7 +197,11 @@
                             <ComboBoxItem Content="Everyone"/>
                         </ComboBox>
                     </StackPanel>
-                        <ContentControl x:Name="CarClassContentControl" Margin="16"/>
+                    <ContentControl x:Name="CarClassContentControl" Margin="16"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Right">
+                        <Button Content="Create Event" Click="CreateEvent_Click" Width="120"/>
+                        <Button Content="Cancel" Click="Cancel_Click" Width="120" Margin="8,0,0,0"/>
+                    </StackPanel>
                 </StackPanel>
             </DockPanel>
         </Grid>
