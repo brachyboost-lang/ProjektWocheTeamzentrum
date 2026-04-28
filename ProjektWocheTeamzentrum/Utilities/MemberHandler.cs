@@ -101,6 +101,53 @@ namespace ProjektWocheTeamzentrum.Utilities
                 MessageBox.Show($"Error saving members file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private static async Task SaveSquadsAsync(List<User> members)
+        {
+            try
+            {
+                string jsonText = JsonSerializer.Serialize(members);
+                string path = GetSquadsFilePath();
+                string? dir = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
+                await File.WriteAllTextAsync(path, jsonText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving members file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private static async Task AddToSquadAsync(User user)
+        {
+            try
+            {
+                string path = GetSquadsFilePath();
+                List<User> squads = new List<User>();
+                if (File.Exists(path))
+                {
+                    string jsonText = await File.ReadAllTextAsync(path);
+                    var squadList = JsonSerializer.Deserialize<List<User>>(jsonText) ?? new List<User>();
+                    foreach (var member in squadList)
+                    {
+                        squads.Add(member);
+                    }
+                }
+                squads.Add(user);
+                await SaveSquadsAsync(squads);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    List<User> squads = new List<User>();
+                    squads.Add(user);
+                    await SaveSquadsAsync(squads);
+                }
+                catch
+                {
+                    MessageBox.Show($"Error on Saving Squads: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
         private static ObservableCollection<User> CreateDefaultMembers()
         {
@@ -144,5 +191,9 @@ namespace ProjektWocheTeamzentrum.Utilities
             string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ProjektWocheTeamzentrum");
             return Path.Combine(dir, "members.json");
         }
-    }
+        private static string GetSquadsFilePath()
+        {
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ProjektWocheTeamzentrum");
+            return Path.Combine(dir, "squads.json");
+        }
 }
