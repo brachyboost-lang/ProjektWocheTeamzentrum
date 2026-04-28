@@ -431,17 +431,16 @@ namespace ProjektWocheTeamzentrum.ViewModels
             MonthDays.Clear();
             DateTime firstDay = new DateTime(year, month, 1);
             int daysInMonth = DateTime.DaysInMonth(year, month);
-            int startDayOffset = (int)firstDay.DayOfWeek == 0 ? 6 : (int)firstDay.DayOfWeek - 1; // Montag als Start
 
-            // Leere Felder für Tage vor dem 1. des Monats
-            for (int i = 0; i < startDayOffset; i++) MonthDays.Add(new DayVM());
+            // Wochentag von Montag (1) bis Sonntag (7)
+            int startDayOffset = (int)firstDay.DayOfWeek == 0 ? 6 : (int)firstDay.DayOfWeek - 1;
 
-            // Tage füllen
+            for (int i = 0; i < startDayOffset; i++) MonthDays.Add(new DayVM()); // Leere Tage
+
             for (int i = 1; i <= daysInMonth; i++)
             {
                 var date = new DateTime(year, month, i);
-                var dayVM = new DayVM { Date = date };
-                // Events filtern
+                var dayVM = new DayVM(date);
                 foreach (var ev in Events.Where(e => e.StartingTime.Date == date.Date))
                 {
                     dayVM.Events.Add(ev);

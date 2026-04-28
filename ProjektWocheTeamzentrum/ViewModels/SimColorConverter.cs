@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Data;
 
-namespace ProjektWocheTeamzentrum.Utilities
+namespace ProjektWocheTeamzentrum.ViewModels
 {
     public class SimColorConverter : IValueConverter
     {
