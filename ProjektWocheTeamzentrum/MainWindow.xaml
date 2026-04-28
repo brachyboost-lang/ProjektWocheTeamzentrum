@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektWocheTeamzentrum"
         mc:Ignorable="d"
-        Title="Teamzentrum" Height="800" Width="1200">
+        Title="Teamzentrum" Height="800" Width="1200" Background="{StaticResource TeamBlack}">
     <StackPanel>
         <DockPanel>
             <Grid>

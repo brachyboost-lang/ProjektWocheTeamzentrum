@@ -1,19 +1,33 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="TeamBlack" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="TeamBlack" Color="#121212"/>
     <SolidColorBrush x:Key="TeamRed" Color="#CC0000"/>
-    <SolidColorBrush x:Key="TeamBackground" Color="#2D2D2D"/>
+    <SolidColorBrush x:Key="TeamWhite" Color="#FFFFFF"/>
 
-    <Style TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource TeamRed}"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Padding" Value="5"/>
+    <Style TargetType="UserControl">
+        <Setter Property="Background" Value="{StaticResource TeamBlack}"/>
     </Style>
 
-    <Style TargetType="Border" x:Key="CalendarBorderStyle">
-        <Setter Property="BorderBrush" Value="{StaticResource TeamRed}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TeamWhite}"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="1" ShadowDepth="0" Color="White" Opacity="1"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource TeamWhite}"/>
+        <Setter Property="Background" Value="{StaticResource TeamRed}"/>
+
+    </Style>
+    <Style TargetType="ListView">
         <Setter Property="Background" Value="{StaticResource TeamBlack}"/>
+
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource TeamBlack}"/>
+        <Setter Property="Background" Value="{StaticResource TeamRed}"/>
+
     </Style>
 </ResourceDictionary>

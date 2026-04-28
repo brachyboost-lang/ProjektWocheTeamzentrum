@@ -33,7 +33,9 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                    <Border BorderBrush="{StaticResource TeamRed}" 
+        BorderThickness="0.5" 
+        Background="{StaticResource TeamBlack}">
                         <StackPanel>
                             <TextBlock Text="{Binding DayText}" FontWeight="Bold" Margin="2"/>
                             <ItemsControl ItemsSource="{Binding Events}">
