@@ -163,7 +163,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
             }
         }
 
-        private void UpdateStartingTime()
+        public void UpdateStartingTime()
         {
             if (SelectedDate.HasValue)
             {

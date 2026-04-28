@@ -80,8 +80,30 @@ namespace ProjektWocheTeamzentrum.Views
 
         }
 
-        private void CreateEvent_Click(object sender, RoutedEventArgs e)
+        private async void CreateEvent_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (DataContext is EventVM vm)
+                {
+                    vm.UpdateStartingTime();
+                    await vm.CreateEvent();
+
+                    var window = Window.GetWindow(this);
+                    if (window != null && window.DataContext is ViewModels.MainWindowVM mainVm)
+                    {
+                        mainVm.RequestViewChange?.Invoke(new ShowEventsUC());
+                    }
+                    else if (window is MainWindow mw)
+                    {
+                        mw.MainContentControl.Content = new ShowEventsUC();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating event: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
