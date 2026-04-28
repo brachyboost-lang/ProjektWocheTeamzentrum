@@ -22,7 +22,8 @@ namespace ProjektWocheTeamzentrum.Views
         public ShowEventsUC()
         {
             InitializeComponent();
-            DataContext = new EventVM();
+            if (DataContext == null)
+                DataContext = new EventVM();
         }
 
         public void NewEvent_Click(object sender, RoutedEventArgs e)

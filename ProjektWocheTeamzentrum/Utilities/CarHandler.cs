@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -13,6 +14,7 @@ namespace ProjektWocheTeamzentrum.Utilities
 {
     public static class CarHandler
     {
+        private static List<CarClass>? _cachedCarClasses;
         public static async Task<List<CarClass>> InitializeCarsAsync()
         {
             List<CarClass> carClasses = new List<CarClass>();
@@ -373,7 +375,7 @@ namespace ProjektWocheTeamzentrum.Utilities
         public static void SaveCars(List<CarClass> cars)
         {
             string jsonText = JsonSerializer.Serialize(cars);
-            File.WriteAllText("cars.json", jsonText);
+            File.WriteAllText("carClasses.json", jsonText);
         }
         public static async Task<List<CarClass>> GetAllCarClassesAsync()
         {
