@@ -18,7 +18,8 @@ namespace ProjektWocheTeamzentrum.Utilities
             List<CarClass> carClasses = new List<CarClass>();
             try
             {
-                await GetAllCarClassesAsync();
+                carClasses = await GetAllCarClassesAsync();
+                if (carClasses != null && carClasses.Count > 0) return carClasses;
             }
             catch (Exception ex)
             {
@@ -366,8 +367,6 @@ namespace ProjektWocheTeamzentrum.Utilities
                 };
                 carClasses.Add(ACC_Cup);
                 SaveCars(carClasses);
-
-                ;
             }
             return carClasses;
         }

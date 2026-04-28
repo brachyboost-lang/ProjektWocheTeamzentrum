@@ -35,10 +35,7 @@ namespace ProjektWocheTeamzentrum
 
         public void EventUC_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: switch to Events view
-
-
-
+            MainContentControl.Content = new ShowEventsUC { DataContext = new EventVM() };
         }
 
         public void UsermanagmentUC_Click(object sender, RoutedEventArgs e)

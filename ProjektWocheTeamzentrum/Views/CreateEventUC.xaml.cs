@@ -25,6 +25,9 @@ namespace ProjektWocheTeamzentrum.Views
             InitializeComponent();
             EventVM DC = new EventVM();
             DataContext = DC;
+            // set default simulation view and ensure CarClassContentControl has the VM as content
+            CarClassContentControl.Content = DataContext;
+            SimulationTypeRadioButton.IsChecked = true;
         }
         private void SimulationRadio_Checked(object sender, RoutedEventArgs e)
         {
@@ -35,15 +38,19 @@ namespace ProjektWocheTeamzentrum.Views
             {
                 case "All":
                     CarClassContentControl.ContentTemplate = (DataTemplate)Resources["AllTemplate"];
+                    CarClassContentControl.Content = DataContext;
                     break;
                 case "LMU":
                     CarClassContentControl.ContentTemplate = (DataTemplate)Resources["LMUTemplate"];
+                    CarClassContentControl.Content = DataContext;
                     break;
                 case "ACC":
                     CarClassContentControl.ContentTemplate = (DataTemplate)Resources["ACCTemplate"];
+                    CarClassContentControl.Content = DataContext;
                     break;
                 case "IR":
                     CarClassContentControl.ContentTemplate = (DataTemplate)Resources["iRacingTemplate"];
+                    CarClassContentControl.Content = DataContext;
                     break;
             }
         }

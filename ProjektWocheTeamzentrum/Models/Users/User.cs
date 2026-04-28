@@ -41,5 +41,10 @@ namespace ProjektWocheTeamzentrum.Models.Users
             // Do not add the user to storage in the constructor to avoid IO side effects during object creation.
         }
 
+        // convenience property for display
+        public string Name => string.IsNullOrWhiteSpace(FirstName) && string.IsNullOrWhiteSpace(LastName)
+            ? string.Empty
+            : (FirstName + (string.IsNullOrWhiteSpace(LastName) ? string.Empty : " " + LastName)).Trim();
+
     }
 }

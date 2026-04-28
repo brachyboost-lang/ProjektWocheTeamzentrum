@@ -14,6 +14,10 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public ObservableCollection<User> Members { get; set; } = new ObservableCollection<User>();
         public RelayCommand AddMemberCommand => new RelayCommand(execute => { }, canExecute => { return canAdd; });
         public string Name { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public int TotalMembers { get => Members.Count; }
+
         public User SelectedMember { get; set; } = null!;
         public User LoggedInUser { get; set; } = null!;
         public bool canAdd { get => LoggedInUser.ClearanceLevel >= 90; }

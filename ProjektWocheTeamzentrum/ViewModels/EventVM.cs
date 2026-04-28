@@ -197,7 +197,37 @@ namespace ProjektWocheTeamzentrum.ViewModels
         }
         public async Task InitializeCarClasses()
         {
-            await CarHandler.InitializeCarsAsync();
+            try
+            {
+                var carClasses = await CarHandler.InitializeCarsAsync();
+                // distribute to simulation-specific collections
+                AvailableCarClasses.Clear();
+                ACCCarClasses.Clear();
+                LMUCarClasses.Clear();
+                IRCarClasses.Clear();
+                foreach (var cc in carClasses)
+                {
+                    AvailableCarClasses.Add(cc);
+                    switch (cc.SimulationType)
+                    {
+                        case 1:
+                            LMUCarClasses.Add(cc);
+                            break;
+                        case 2:
+                            ACCCarClasses.Add(cc);
+                            break;
+                        case 3:
+                            IRCarClasses.Add(cc);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
         }
         public EventVM()
         {
