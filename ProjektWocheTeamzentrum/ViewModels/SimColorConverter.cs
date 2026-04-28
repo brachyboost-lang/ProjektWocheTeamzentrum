@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
@@ -13,7 +14,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
             int simType = (int)value;
             return simType switch
             {
-                1 => Brushes.LightRed, // LMU
+                1 => Brushes.Red, // LMU
                 2 => Brushes.LightBlue,  // ACC
                 3 => Brushes.Purple,     // iRacing
                 _ => Brushes.LightGray   // Andere
