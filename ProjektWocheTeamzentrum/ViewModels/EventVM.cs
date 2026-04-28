@@ -1,24 +1,23 @@
 ﻿using ProjektWocheTeamzentrum.Models.Events;
 using ProjektWocheTeamzentrum.Models.Users;
 using ProjektWocheTeamzentrum.Utilities;
+using ProjektWocheTeamzentrum.Models.Cars;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using System.Text;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
-using System.Windows.Documents;
-using ProjektWocheTeamzentrum.Models.Cars;
 using System.Windows;
-
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
     public class EventVM : BaseVM
     {
-        public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
-        public ObservableCollection<User> RegisteredParticipants { get; set; } = new ObservableCollection<User>();
-        public int EventId { get; set; }
+        // Core collections
+        public ObservableCollection<Event> Events { get; } = new ObservableCollection<Event>();
+        public ObservableCollection<User> RegisteredParticipants { get; } = new ObservableCollection<User>();
+
+        // Basic event properties
         private DateTime _startingTime = DateTime.Now;
         public DateTime StartingTime
         {
@@ -32,10 +31,12 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 }
             }
         }
+
         public string Name { get; set; } = "Name";
         public string Track { get; set; } = "Track";
         public int DurationInMinutes { get; set; }
         public string EventLocation { get; set; } = "Meeting Location";
+
         private int _requiredClearanceLevel;
         public int RequiredClearanceLevel
         {
@@ -49,9 +50,10 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 }
             }
         }
-        public int IdHandler { get; set; } = 0;
+
         public int MaxParticipants { get; set; } = 0;
         public int MaxDriversPerCar { get; set; } = 0;
+
         private string _selectedParticipants = string.Empty;
         public string SelectedParticipants
         {
@@ -62,7 +64,6 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 {
                     _selectedParticipants = value;
                     OnPropertyChanged(nameof(SelectedParticipants));
-                    // map selected participants to clearance level
                     RequiredClearanceLevel = value?.ToLowerInvariant() switch
                     {
                         "leaders" => 80,
@@ -74,22 +75,28 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 }
             }
         }
-        public string Description { get; set; } = "Description";
-        public string LeagueURL { get; set; } = "League URL";
-        public string BroadcastURL { get; set; } = "Broadcast URL";
+
+        public string Description { get; set; } = string.Empty;
+        public string LeagueURL { get; set; } = string.Empty;
+        public string BroadcastURL { get; set; } = string.Empty;
         public bool IsEsports { get; set; } = false;
         public bool IsBroadcasted { get; set; } = false;
         public bool IsLeague { get; set; } = false;
         public int SimulationType { get; set; } = 0;
         public bool IsEndurance { get; set; } = false;
+
         public User? LoggedInUser { get; set; }
-        public ObservableCollection<CarClass> AvailableCarClasses { get; set; } = new ObservableCollection<CarClass>();
-        public ObservableCollection<CarClass> ACCCarClasses { get; set; } = new ObservableCollection<CarClass>();
-        public ObservableCollection<CarClass> LMUCarClasses { get; set; } = new ObservableCollection<CarClass>();
-        public ObservableCollection<CarClass> IRCarClasses { get; set; } = new ObservableCollection<CarClass>();
-        public ObservableCollection<CarClass> TeamEvents { get; set; } = new ObservableCollection<CarClass>();
-        public ObservableCollection<CarClass> SelectedCarClasses { get; set; } = new ObservableCollection<CarClass>();
+
+        // Car class collections
+        public ObservableCollection<CarClass> AvailableCarClasses { get; } = new ObservableCollection<CarClass>();
+        public ObservableCollection<CarClass> ACCCarClasses { get; } = new ObservableCollection<CarClass>();
+        public ObservableCollection<CarClass> LMUCarClasses { get; } = new ObservableCollection<CarClass>();
+        public ObservableCollection<CarClass> IRCarClasses { get; } = new ObservableCollection<CarClass>();
+        public ObservableCollection<CarClass> TeamEvents { get; } = new ObservableCollection<CarClass>();
+        public ObservableCollection<CarClass> SelectedCarClasses { get; } = new ObservableCollection<CarClass>();
+
         public Event SelectedEvent { get; set; }
+
         public string Location
         {
             get => EventLocation;
@@ -102,8 +109,9 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 }
             }
         }
-        public RelayCommand AddEventCommand => new RelayCommand(async execute => { await CreateEvent(); }, canExecute => { return canEditEvent(); });
-        public RelayCommand DeleteEventCommand => new RelayCommand(execute => { }, canExecute => { return canEditEvent() && SelectedEvent != null; });
+
+        public RelayCommand AddEventCommand => new RelayCommand(async _ => await CreateEvent(), _ => canEditEvent());
+        public RelayCommand DeleteEventCommand => new RelayCommand(_ => { }, _ => canEditEvent() && SelectedEvent != null);
 
         public bool canEditEvent()
         {
@@ -195,6 +203,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
             }
         }
+
         public async Task InitializeCarClasses()
         {
             try
@@ -223,17 +232,24 @@ namespace ProjektWocheTeamzentrum.ViewModels
                             break;
                     }
                 }
+                // wire up change notifications so UI selections (IsSelected) update SelectedCarClasses
+                WireCarClassCollection(AvailableCarClasses);
+                WireCarClassCollection(ACCCarClasses);
+                WireCarClassCollection(LMUCarClasses);
+                WireCarClassCollection(IRCarClasses);
+                WireCarClassCollection(TeamEvents);
             }
             catch
             {
-                
+
             }
         }
+
         public EventVM()
         {
             _ = InitializeEvents();
             _ = InitializeCarClasses();
-            CarClass TeamEvents = new CarClass
+            var teamEventClass = new CarClass
             {
                 Name = "Team Events",
                 SimulationType = 0,
@@ -247,7 +263,12 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 new Car("Gruppen Coaching")
                     }
             };
+            teamEventClass.IsSelected = false;
+            this.TeamEvents.Add(teamEventClass);
+            // ensure handlers are wired for team events
+            WireCarClassCollection(this.TeamEvents);
         }
+
         public async Task CreateEvent()
         {
             if (SimulationType > 0)
@@ -299,7 +320,70 @@ namespace ProjektWocheTeamzentrum.ViewModels
                     MessageBox.Show($"Error creating event: {ex.Message}", "Error", button, icon);
                 }
         }
+
         private const double HourHeight = 60; // 1 Stunde = 60px
+
+        private void WireCarClassCollection(ObservableCollection<CarClass> collection)
+        {
+            if (collection == null) return;
+            // subscribe to future changes
+            collection.CollectionChanged -= CarClassCollection_CollectionChanged;
+            collection.CollectionChanged += CarClassCollection_CollectionChanged;
+
+            foreach (var cc in collection)
+            {
+                cc.PropertyChanged -= CarClass_PropertyChanged;
+                cc.PropertyChanged += CarClass_PropertyChanged;
+                // ensure already-selected items are present in SelectedCarClasses
+                if (cc.IsSelected)
+                {
+                    if (!SelectedCarClasses.Contains(cc)) SelectedCarClasses.Add(cc);
+                }
+            }
+        }
+
+        private void CarClassCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e == null) return;
+            if (e.NewItems != null)
+            {
+                foreach (var ni in e.NewItems)
+                {
+                    if (ni is CarClass cc)
+                    {
+                        cc.PropertyChanged -= CarClass_PropertyChanged;
+                        cc.PropertyChanged += CarClass_PropertyChanged;
+                        if (cc.IsSelected && !SelectedCarClasses.Contains(cc)) SelectedCarClasses.Add(cc);
+                    }
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (var oi in e.OldItems)
+                {
+                    if (oi is CarClass cc)
+                    {
+                        cc.PropertyChanged -= CarClass_PropertyChanged;
+                        if (SelectedCarClasses.Contains(cc)) SelectedCarClasses.Remove(cc);
+                    }
+                }
+            }
+        }
+
+        private void CarClass_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CarClass.IsSelected) && sender is CarClass cc)
+            {
+                if (cc.IsSelected)
+                {
+                    if (!SelectedCarClasses.Contains(cc)) SelectedCarClasses.Add(cc);
+                }
+                else
+                {
+                    if (SelectedCarClasses.Contains(cc)) SelectedCarClasses.Remove(cc);
+                }
+            }
+        }
 
         public string Title { get => Name; set => Name = value; }
         public DateTime Start { get => StartingTime; set => StartingTime = value; }
@@ -311,12 +395,12 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
         public double Left => 5;   // später für Overlap
         public double Width => 120;
-
+        // Convenience constructor used by CalendarVM for demo events
         public EventVM(string title, DateTime start, DateTime end)
         {
-            Title = title;
-            Start = start;
-            End = end;
+            Name = title;
+            StartingTime = start;
+            DurationInMinutes = (int)(end - start).TotalMinutes;
         }
     }
 }
