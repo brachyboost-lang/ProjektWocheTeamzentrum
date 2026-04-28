@@ -10,7 +10,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
     {
         public DateTime Date { get; set; } // Das Datum des Tages
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
-        public string DayName => Date.ToString("dddd");
+        public string DayName { get => Date.ToString("dddd"); set; }
         // Standard-Konstruktor für leere Felder
         public DayVM() { Date = DateTime.Now; }
 

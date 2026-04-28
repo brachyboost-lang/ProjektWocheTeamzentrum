@@ -47,43 +47,30 @@
                         <UniformGrid Columns="7"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
+            </ItemsControl>
+            <ItemsControl ItemsSource="{Binding MonthDays}" Grid.Column="0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="7" Rows="6"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Gray" BorderThickness="0.5">
-                            <Canvas>
-
-                                <ItemsControl ItemsSource="{Binding MonthDays}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <UniformGrid Columns="7" Rows="6"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-
+                        <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Date.Day}" FontWeight="Bold" Margin="2"/>
+                                <ItemsControl ItemsSource="{Binding Events}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
-                                                <StackPanel>
-                                                    <TextBlock Text="{Binding Date.Day}" FontWeight="Bold" Margin="2"/>
-
-                                                    <ItemsControl ItemsSource="{Binding Events}">
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <Border Margin="1" 
-                                        Background="{Binding SimulationType, Converter={StaticResource SimColorConverter}}" 
-                                        CornerRadius="2">
-                                                                    <TextBlock Text="{Binding Title}" FontSize="9" FontWeight="Bold"/>
-                                                                </Border>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                    </ItemsControl>
-                                                </StackPanel>
+                                            <Border Margin="1" 
+                                                Background="{Binding SimulationType, Converter={StaticResource SimColorConverter}}" 
+                                                CornerRadius="2">
+                                                <TextBlock Text="{Binding Title}" FontSize="9" FontWeight="Bold"/>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-
-                            </Canvas>
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
