@@ -93,6 +93,19 @@ namespace ProjektWocheTeamzentrum.Views
             {
                 if (DataContext is EventVM vm)
                 {
+                    // force-update bindings from controls so latest values are in the VM
+                    try
+                    {
+                        EventNameTextBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+                        EventDescriptionTextBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+                        EventLocationTextBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+                        DurationTextBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+                        ParticipantsComboBox.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
+                        HoursComboBox.GetBindingExpression(ComboBox.SelectedIndexProperty)?.UpdateSource();
+                        MinutesComboBox.GetBindingExpression(ComboBox.SelectedIndexProperty)?.UpdateSource();
+                    }
+                    catch { }
+
                     vm.UpdateStartingTime();
                     await vm.CreateEvent();
 
