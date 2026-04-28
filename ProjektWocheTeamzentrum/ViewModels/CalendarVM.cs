@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using ProjektWocheTeamzentrum.Utilities;
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
@@ -13,37 +14,30 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
         public CalendarVM()
         {
-            Hours = Enumerable.Range(0, 24)
-                .Select(h => $"{h:00}:00")
-                .ToList();
+            Hours = Enumerable.Range(0, 24).Select(h => $"{h:00}:00").ToList();
 
-            Days = new List<DayVM>();
-
-            for (int i = 0; i < 7; i++)
-            {
-                var day = new DayVM(DateTime.Today.AddDays(i));
-                day.GenerateTestEvents();
-                Days.Add(day);
-            }
+            // Initialisiere mit dem aktuellen Datum
+            _ = BuildCalendar(DateTime.Now.Year, DateTime.Now.Month);
         }
         public ObservableCollection<DayVM> MonthDays { get; } = new ObservableCollection<DayVM>();
-        public void BuildCalendar(int year, int month)
+        public async Task BuildCalendar(int year, int month)
         {
+            var allEvents = await EventUtil.GetAllEventsAsync();
+
             MonthDays.Clear();
             DateTime firstDay = new DateTime(year, month, 1);
             int daysInMonth = DateTime.DaysInMonth(year, month);
-
-            // Wochentag von Montag (1) bis Sonntag (7)
             int startDayOffset = (int)firstDay.DayOfWeek == 0 ? 6 : (int)firstDay.DayOfWeek - 1;
 
-            for (int i = 0; i < startDayOffset; i++) MonthDays.Add(new DayVM()); // Leere Tage
+            for (int i = 0; i < startDayOffset; i++) MonthDays.Add(new DayVM(DateTime.MinValue));
 
             for (int i = 1; i <= daysInMonth; i++)
             {
                 var date = new DateTime(year, month, i);
                 var dayVM = new DayVM(date);
-                var evDM = new EventVM();
-                foreach (var ev in evDM.Events.Where(e => e.StartingTime.Date == date.Date))
+
+                // KORREKTUR: Filter hier die 'allEvents' Liste!
+                foreach (var ev in allEvents.Where(e => e.StartingTime.Date == date.Date))
                 {
                     dayVM.Events.Add(ev);
                 }

@@ -196,13 +196,14 @@ namespace ProjektWocheTeamzentrum.ViewModels
         {
             try
             {
+                var cvm = new CalendarVM();
+                var date = DateTime.Today;
+                var dayVM = new DayVM { DayName = date.ToString("dddd") };
                 List<Event> events = new List<Event>();
                 events = await EventUtil.GetAllEventsAsync();
                 for (int i = 0; i < 7; i++)
                 {
-                    var date = DateTime.Today.AddDays(i);
-                    var dayVM = new DayVM { DayName = date.ToString("dddd") };
-
+                    date = date.AddDays(i);
                     // Filter events for this day
                     foreach (var e in events.Where(ev => ev.StartingTime.Date == date.Date))
                     {
@@ -210,10 +211,12 @@ namespace ProjektWocheTeamzentrum.ViewModels
                     }
                     Days.Add(dayVM);
                 }
-                    foreach (Event e in events)
+                foreach (Event e in events)
                 {
                     Events.Add(e);
+
                 }
+                cvm.BuildCalendar(DateTime.Now.Year, DateTime.Now.Month);
             }
             catch (Exception)
             {
@@ -426,7 +429,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         }
 
 
-        
+
     }
 }
 

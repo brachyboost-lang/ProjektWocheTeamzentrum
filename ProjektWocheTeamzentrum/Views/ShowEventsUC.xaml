@@ -16,7 +16,7 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <ItemsControl Grid.Column="0" ItemsSource="{Binding MonthDays}">
+        <ItemsControl Grid.Column="0" ItemsSource="{Binding ElementName=CalendarGrid, Path=DataContext.MonthDays}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="7" Rows="6"/>

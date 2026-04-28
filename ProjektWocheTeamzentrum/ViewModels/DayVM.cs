@@ -8,13 +8,18 @@ namespace ProjektWocheTeamzentrum.ViewModels
 {
     public class DayVM
     {
-        public DateTime Date { get; set; } // Das Datum des Tages
+        public DateTime Date { get; set; }
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
+
+        // Dieser Konstruktor wird für die leeren Tage (startDayOffset) gebraucht
+        public DayVM(DateTime date)
+        {
+            Date = date;
+        }
         public string DayName { get => Date.ToString("dddd"); set; }
         // Standard-Konstruktor für leere Felder
         public DayVM() { Date = DateTime.Now; }
 
-        public DayVM(DateTime date) { Date = date; }
 
         public void GenerateTestEvents()
         {
