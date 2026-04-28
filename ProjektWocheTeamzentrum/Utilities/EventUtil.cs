@@ -20,7 +20,52 @@ namespace ProjektWocheTeamzentrum.Utilities
                 if (File.Exists(path))
                 {
                     string json = await File.ReadAllTextAsync(path);
-                    JsonSerializer.Deserialize<List<Event>>(json)?.ForEach(e => events.Add(e));
+                    using var doc = JsonDocument.Parse(json);
+                    if (doc.RootElement.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var item in doc.RootElement.EnumerateArray())
+                        {
+                            // new wrapper format: { "EventType": "Race", "Event": { ... } }
+                            if (item.ValueKind == JsonValueKind.Object && item.TryGetProperty("EventType", out var tprop) && item.TryGetProperty("Event", out var eprop))
+                            {
+                                var typeName = tprop.GetString();
+                                var raw = eprop.GetRawText();
+                                if (string.Equals(typeName, "Race", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    var race = JsonSerializer.Deserialize<Race>(raw);
+                                    if (race != null) events.Add(race);
+                                }
+                                else
+                                {
+                                    var ev = JsonSerializer.Deserialize<Event>(raw);
+                                    if (ev != null) events.Add(ev);
+                                }
+                            }
+                            else
+                            {
+                                // old simple array of Event/Race objects - try to detect Race by available properties
+                                var raw = item.GetRawText();
+                                // attempt Race first
+                                try
+                                {
+                                    var race = JsonSerializer.Deserialize<Race>(raw);
+                                    if (race != null && (race.CarClasses?.Count > 0 || race.SimulationType != 0))
+                                    {
+                                        events.Add(race);
+                                        continue;
+                                    }
+                                }
+                                catch { }
+
+                                try
+                                {
+                                    var ev = JsonSerializer.Deserialize<Event>(raw);
+                                    if (ev != null) events.Add(ev);
+                                }
+                                catch { }
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -53,7 +98,13 @@ namespace ProjektWocheTeamzentrum.Utilities
         {
             try
             {
-                string json = JsonSerializer.Serialize(events, new JsonSerializerOptions { WriteIndented = true });
+                // wrap each event with its concrete type name so we can deserialize polymorphically later
+                var wrappers = new List<object>();
+                foreach (var e in events)
+                {
+                    wrappers.Add(new { EventType = e.GetType().Name, Event = e });
+                }
+                string json = JsonSerializer.Serialize(wrappers, new JsonSerializerOptions { WriteIndented = true });
                 string path = GetEventsFilePath();
                 string? dir = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
