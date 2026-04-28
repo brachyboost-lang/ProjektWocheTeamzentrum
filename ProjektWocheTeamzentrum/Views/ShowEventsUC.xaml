@@ -50,27 +50,33 @@
                         <Border BorderBrush="Gray" BorderThickness="0.5">
                             <Canvas>
 
-                                <ItemsControl ItemsSource="{Binding Events}">
-                                    <ItemsControl.ItemContainerStyle>
-                                        <Style>
-                                            <Setter Property="Canvas.Top" Value="{Binding Top}"/>
-                                            <Setter Property="Canvas.Left" Value="{Binding Left}"/>
-                                        </Style>
-                                    </ItemsControl.ItemContainerStyle>
-
+                                <ItemsControl ItemsSource="{Binding MonthDays}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="7" Rows="6"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border Width="{Binding Width}"
-                                                Height="{Binding Height}"
-                                                Background="LightBlue"
-                                                BorderBrush="Black"
-                                                BorderThickness="1">
-                                                <TextBlock Text="{Binding Title}"
-                                                       TextWrapping="Wrap"/>
+                                            <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Date.Day}" FontWeight="Bold" Margin="2"/>
+                                                    <ItemsControl ItemsSource="{Binding Events}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border Margin="1" Background="{Binding SimulationType, Converter={StaticResource SimColorConverter}}" CornerRadius="2">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="{Binding Title}" FontSize="9" FontWeight="Bold"/>
+                                                                        <TextBlock Text="{Binding StartingTime, StringFormat=HH:mm}" FontSize="8"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
-
                                 </ItemsControl>
 
                             </Canvas>

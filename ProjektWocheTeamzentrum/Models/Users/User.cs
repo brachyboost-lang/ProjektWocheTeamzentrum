@@ -16,8 +16,6 @@ namespace ProjektWocheTeamzentrum.Models.Users
         public int ClearanceLevel { get; set; } = 0;
         public int[] SimulationType { get; set; }
         public Squad? Team { get; set; }
-        // Do not call async methods synchronously in property initializers or constructors.
-        // Id will be assigned when the user is persisted.
 
         public User(string firstName, string lastName, string email, DateOnly birthday, int clearanceLevel, int[] simulationType)
         {

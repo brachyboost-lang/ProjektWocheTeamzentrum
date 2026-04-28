@@ -96,6 +96,11 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public ObservableCollection<CarClass> SelectedCarClasses { get; } = new ObservableCollection<CarClass>();
 
         public Event SelectedEvent { get; set; }
+        public ObservableCollection<string> Hours { get; } = new ObservableCollection<string>(
+    Enumerable.Range(0, 24).Select(h => h.ToString("00") + ":00")
+);
+
+        public ObservableCollection<DayVM> Days { get; } = new ObservableCollection<DayVM>();
 
         public string Location
         {
@@ -193,7 +198,19 @@ namespace ProjektWocheTeamzentrum.ViewModels
             {
                 List<Event> events = new List<Event>();
                 events = await EventUtil.GetAllEventsAsync();
-                foreach (Event e in events)
+                for (int i = 0; i < 7; i++)
+                {
+                    var date = DateTime.Today.AddDays(i);
+                    var dayVM = new DayVM { DayName = date.ToString("dddd") };
+
+                    // Filter events for this day
+                    foreach (var e in events.Where(ev => ev.StartingTime.Date == date.Date))
+                    {
+                        dayVM.Events.Add(e);
+                    }
+                    Days.Add(dayVM);
+                }
+                    foreach (Event e in events)
                 {
                     Events.Add(e);
                 }
@@ -406,6 +423,31 @@ namespace ProjektWocheTeamzentrum.ViewModels
             Name = title;
             StartingTime = start;
             DurationInMinutes = (int)(end - start).TotalMinutes;
+        }
+        public ObservableCollection<DayVM> MonthDays { get; } = new ObservableCollection<DayVM>();
+
+        public void BuildCalendar(int year, int month)
+        {
+            MonthDays.Clear();
+            DateTime firstDay = new DateTime(year, month, 1);
+            int daysInMonth = DateTime.DaysInMonth(year, month);
+            int startDayOffset = (int)firstDay.DayOfWeek == 0 ? 6 : (int)firstDay.DayOfWeek - 1; // Montag als Start
+
+            // Leere Felder für Tage vor dem 1. des Monats
+            for (int i = 0; i < startDayOffset; i++) MonthDays.Add(new DayVM());
+
+            // Tage füllen
+            for (int i = 1; i <= daysInMonth; i++)
+            {
+                var date = new DateTime(year, month, i);
+                var dayVM = new DayVM { Date = date };
+                // Events filtern
+                foreach (var ev in Events.Where(e => e.StartingTime.Date == date.Date))
+                {
+                    dayVM.Events.Add(ev);
+                }
+                MonthDays.Add(dayVM);
+            }
         }
     }
 }

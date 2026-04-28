@@ -9,7 +9,7 @@ namespace ProjektWocheTeamzentrum.Models.Users
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public List<User> Users { get; set; }
+        public List<User>? Users { get; set; }
         public User? TeamLeader { get; set; }
         public int[] Simulation { get; set; } = Array.Empty<int>();
 
@@ -52,5 +52,6 @@ namespace ProjektWocheTeamzentrum.Models.Users
             Users = new List<User>();
             Simulation = Array.Empty<int>();
         }
+        public Squad() { }
     }
 }

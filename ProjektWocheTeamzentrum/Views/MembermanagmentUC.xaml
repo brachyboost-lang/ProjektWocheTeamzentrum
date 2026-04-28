@@ -34,20 +34,36 @@
         <Button Content="Add Member" Command="{Binding AddMemberCommand}" Grid.Column="1" Grid.Row="3"/>
         <Button Content="Delete Member" Command="{Binding DeleteMemberCommand}" Grid.Column="1" Grid.Row="5"/>
         <Button Content="Edit Member" Click="EditMember_Click" Grid.Column="1" Grid.Row="7"/>
-        <Button Content="Back" Click="Back_Click" Grid.Column="1" Grid.Row="9"/>
+        <Button Content="Add to Squad" Click="Back_Click" Grid.Column="1" Grid.Row="9"/>
         <ListView x:Name="MembersListBox"  ItemsSource="{Binding Members}" SelectedItem="{Binding SelectedMember, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" Grid.RowSpan="11" Margin="10" Visibility="Collapsed">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
+                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock x:Name="StatsTextBlock" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10" Background="LightGray">
-            <Label Content="Total Members: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
-            <Label Content="{Binding TotalMembers}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
-            <Label Content="Squads: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
-            <Label Content="{Binding Squads}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5"/>
-            
-        </TextBlock>
+        <StackPanel x:Name="StatsPanel" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10" Background="LightGray">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Total Members: "/>
+                <Label Content="{Binding TotalMembers}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Squads: "/>
+                <Label Content="{Binding SquadsCount}"/>
+            </StackPanel>
+
+            <ListView x:Name="SquadsListBox" 
+              ItemsSource="{Binding Squads}" 
+              SelectedItem="{Binding SelectedSquad, Mode=TwoWay}"
+              Height="200">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding SquadName}" Margin="5"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
     </Grid>
 </UserControl>

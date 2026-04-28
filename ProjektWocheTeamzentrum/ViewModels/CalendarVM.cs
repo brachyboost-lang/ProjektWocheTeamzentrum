@@ -24,22 +24,6 @@ namespace ProjektWocheTeamzentrum.ViewModels
                 Days.Add(day);
             }
         }
-        public class DayVM
-        {
-            public DateTime Date { get; set; }
-            public List<EventVM> Events { get; set; }
-
-            public DayVM(DateTime date)
-            {
-                Date = date;
-                Events = new List<EventVM>();
-            }
-
-            public void GenerateTestEvents()
-            {
-                Events.Add(new EventVM("Race 1", Date.AddHours(10), Date.AddHours(12)));
-                Events.Add(new EventVM("Training", Date.AddHours(14), Date.AddHours(15)));
-            }
-        }
     }
 }
+

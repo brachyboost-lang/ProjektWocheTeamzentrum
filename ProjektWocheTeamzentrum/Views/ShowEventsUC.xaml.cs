@@ -19,11 +19,26 @@ namespace ProjektWocheTeamzentrum.Views
     /// </summary>
     public partial class ShowEventsUC : UserControl
     {
+        private ViewModels.CalendarVM? _calendarVm;
+
         public ShowEventsUC()
         {
             InitializeComponent();
             if (DataContext == null)
                 DataContext = new CalendarVM();
+
+            // create a dedicated CalendarVM for the left-side calendar and assign it
+            // to the named grid so its bindings (Hours, Days) work regardless of
+            // the control's overall DataContext (which may be an EventVM).
+            _calendarVm = new ViewModels.CalendarVM();
+            try
+            {
+                CalendarGrid.DataContext = _calendarVm;
+            }
+            catch
+            {
+                // ignore if the named element isn't present at construction time
+            }
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

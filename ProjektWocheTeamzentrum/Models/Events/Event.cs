@@ -18,10 +18,17 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public int IdHandler { get; set; } = 0;
         public List<User> VisibleToUsers { get; set; } = new List<User>();
         public string Description { get; set; } = string.Empty;
+        public DateTime EndingTime { get; set; }
 
         // parameterless ctor required for JSON deserialization
         public Event()
         {
+        }
+        public Event(string name, DateTime startingTime, DateTime endingTime)
+        {
+            Name = name;
+            StartingTime = startingTime;
+            EndingTime = endingTime;
         }
 
         public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel, string description)

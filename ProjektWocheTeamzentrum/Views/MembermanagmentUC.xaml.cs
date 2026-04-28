@@ -33,23 +33,25 @@ namespace ProjektWocheTeamzentrum.Views
             if (MembersListBox.Visibility == Visibility.Collapsed)
             {
                 btnViewMembers.Content = "Show Members";
-                StatsTextBlock.Visibility = Visibility.Visible;
+                StatsPanel.Visibility = Visibility.Visible;
             }
             else
             {
                 btnViewMembers.Content = "Hide Members";
-                StatsTextBlock.Visibility = Visibility.Collapsed;
+                StatsPanel.Visibility = Visibility.Collapsed;
             }
         }
 
         public void AddMember_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Implement add member logic
+            // May be obsolete when syncing over DB or discord login
         }
 
         public void DeleteMember_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Implement delete member logic
+            // May be obsolete when syncing over DB or discord login
         }
 
         public void EditMember_Click(object sender, RoutedEventArgs e)
@@ -59,7 +61,8 @@ namespace ProjektWocheTeamzentrum.Views
 
         public void Back_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement back navigation logic
+
+            //Placeholder for Add to Squad Logic
         }
     }
 }
