@@ -180,14 +180,14 @@
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7">
             <DockPanel Margin="22" LastChildFill="True">
                 <StackPanel DockPanel.Dock="Left" Width="420" Margin="0,0,20,0" HorizontalAlignment="Left">
-                    <TextBox x:Name="EventNameTextBox" Width="400" Height="24" Text="{Binding Description}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="EventNameTextBox" Width="400" Height="24" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
                     <Grid Margin="0,0,0,8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <TextBox x:Name="EventDescriptionTextBox" Width="400" Height="60" Text="{Binding Description}" Margin="0,0,0,8" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="EventDescriptionTextBox" Width="400" Height="60" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
                             <TextBox x:Name="EventLocationTextBox" Width="400" Height="24" Text="{Binding Location}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Top">
@@ -236,9 +236,9 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
                         <Label Content="Duration:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        <TextBox x:Name="DurationTextBox" HorizontalAlignment="Left" Width="80" Margin="8,0,0,0" Text="(minutes)"/>
+                        <TextBox x:Name="DurationTextBox" HorizontalAlignment="Left" Width="80" Margin="8,0,0,0" Text="{Binding DurationInMinutes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="Participants:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                        <ComboBox x:Name="ParticipantsComboBox" Width="80" Margin="8,0,0,0" SelectedItem="{Binding SelectedParticipants}">
+                        <ComboBox x:Name="ParticipantsComboBox" Width="80" Margin="8,0,0,0" SelectedValuePath="Content" SelectedValue="{Binding SelectedParticipants, Mode=TwoWay}">
                             <ComboBoxItem Content="Leaders"/>
                             <ComboBoxItem Content="Coach"/>
                             <ComboBoxItem Content="Members"/>

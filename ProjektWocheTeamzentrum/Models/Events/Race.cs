@@ -8,6 +8,9 @@ namespace ProjektWocheTeamzentrum.Models.Events
 {
     public class Race : Event
     {
+        // parameterless ctor for deserialization
+        public Race() : base(default, string.Empty, 0, string.Empty, 0, string.Empty) { }
+
         public List<CarClass> CarClasses { get; set; } = new List<CarClass>();
         public string Track { get; set; } = string.Empty;
         public int SimulationType { get; set; }
