@@ -6,9 +6,10 @@ using System.Text;
 
 namespace ProjektWocheTeamzentrum.ViewModels
 {
-    public class DayVM
+    public class DayVM : BaseVM
     {
         public DateTime Date { get; set; }
+        public string DayText => Date == DateTime.MinValue ? "" : Date.Day.ToString();
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
 
         // Dieser Konstruktor wird für die leeren Tage (startDayOffset) gebraucht

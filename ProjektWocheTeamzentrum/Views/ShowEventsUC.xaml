@@ -16,7 +16,16 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <ItemsControl Grid.Column="0" ItemsSource="{Binding ElementName=CalendarGrid, Path=DataContext.MonthDays}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="5">
+            <TextBlock Text="{Binding ElementName=CalendarGrid, Path=DataContext.CurrentMonthDisplay}" 
+                   FontSize="24" FontWeight="Bold"/>
+        </StackPanel>
+        <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ElementName=CalendarGrid, Path=DataContext.MonthDays}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="7" Rows="6"/>
@@ -26,12 +35,12 @@
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="0.5" Background="White">
                         <StackPanel>
-                            <TextBlock Text="{Binding Date.Day}" FontWeight="Bold" Margin="2"/>
+                            <TextBlock Text="{Binding DayText}" FontWeight="Bold" Margin="2"/>
                             <ItemsControl ItemsSource="{Binding Events}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border Margin="1" Background="{Binding SimulationType, Converter={StaticResource SimColorConverter}}" CornerRadius="2">
-                                            <TextBlock Text="{Binding Title}" FontSize="9" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding Name}" FontSize="9" FontWeight="Bold"/>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
