@@ -269,5 +269,25 @@ namespace ProjektWocheTeamzentrum.ViewModels
                     MessageBox.Show($"Error creating event: {ex.Message}", "Error", button, icon);
                 }
         }
+        private const double HourHeight = 60; // 1 Stunde = 60px
+
+        public string Title { get => Name; set => Name = value; }
+        public DateTime Start { get => StartingTime; set => StartingTime = value; }
+        public DateTime End { get => StartingTime.AddMinutes(DurationInMinutes); set => DurationInMinutes = (int)(value - StartingTime).TotalMinutes; }
+
+        public double Top => (Start.Hour + Start.Minute / 60.0) * HourHeight;
+
+        public double Height => (End - Start).TotalHours * HourHeight;
+
+        public double Left => 5;   // später für Overlap
+        public double Width => 120;
+
+        public EventVM(string title, DateTime start, DateTime end)
+        {
+            Title = title;
+            Start = start;
+            End = end;
+        }
     }
 }
+

@@ -7,6 +7,88 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Zeitspalte -->
+            <ItemsControl Grid.Column="0" ItemsSource="{Binding Hours}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Height="60"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Tage -->
+            <ItemsControl Grid.Column="1" Grid.ColumnSpan="7" ItemsSource="{Binding Days}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="7"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="0.5">
+                            <Canvas>
+
+                                <ItemsControl ItemsSource="{Binding Events}">
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style>
+                                            <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                                            <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="{Binding Width}"
+                                                Height="{Binding Height}"
+                                                Background="LightBlue"
+                                                BorderBrush="Black"
+                                                BorderThickness="1">
+                                                <TextBlock Text="{Binding Title}"
+                                                       TextWrapping="Wrap"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+
+                                </ItemsControl>
+
+                            </Canvas>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Grid>
+        <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="10">
+            <Button Content="New Event" Click="NewEvent_Click" Margin="10"/>
+            <RadioButton Content="All" GroupName="SimulationFilter" Margin="10"/>
+            <RadioButton Content="Le Mans Ultimate" GroupName="SimulationFilter" Margin="10"/>
+            <RadioButton Content="Assetto Corsa Competizione" GroupName="SimulationFilter" Margin="10"/>
+            <RadioButton Content="iRacing" GroupName="SimulationFilter" Margin="10"/>
+            <RadioButton Content="Real Life Motorsport" GroupName="SimulationFilter" Margin="10"/>
+            <RadioButton Content="Team Events" GroupName="SimulationFilter" Margin="10"/>
+            <ListBox x:Name="EventsListBox" Margin="0,0,0,10"/>
+        </StackPanel>
     </Grid>
 </UserControl>
