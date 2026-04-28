@@ -19,7 +19,7 @@ namespace ProjektWocheTeamzentrum.Views
     /// </summary>
     public partial class ShowEventsUC : UserControl
     {
-        private ViewModels.CalendarVM? _calendarVm;
+        private CalendarVM? _calendarVm;
 
         public ShowEventsUC()
         {
@@ -30,7 +30,7 @@ namespace ProjektWocheTeamzentrum.Views
             // create a dedicated CalendarVM for the left-side calendar and assign it
             // to the named grid so its bindings (Hours, Days) work regardless of
             // the control's overall DataContext (which may be an EventVM).
-            _calendarVm = new ViewModels.CalendarVM();
+            _calendarVm = new CalendarVM();
             try
             {
                 CalendarGrid.DataContext = _calendarVm;
@@ -43,7 +43,7 @@ namespace ProjektWocheTeamzentrum.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             // if DataContext is EventVM, ensure the calendar grid is bound or refreshed
-            if (DataContext is ViewModels.EventVM evm)
+            if (DataContext is EventVM evm)
             {
                 // no-op: events collection is observable and UI will update automatically
             }
@@ -53,7 +53,7 @@ namespace ProjektWocheTeamzentrum.Views
         {
             // Request the main window to switch the content to CreateEventUC
             var window = Window.GetWindow(this);
-            if (window != null && window.DataContext is ViewModels.MainWindowVM vm)
+            if (window != null && window.DataContext is MainWindowVM vm)
             {
                 vm.RequestViewChange?.Invoke(new CreateEventUC());
             }
