@@ -99,11 +99,11 @@ namespace ProjektWocheTeamzentrum.Views
                     var window = Window.GetWindow(this);
                     if (window != null && window.DataContext is ViewModels.MainWindowVM mainVm)
                     {
-                        mainVm.RequestViewChange?.Invoke(new ShowEventsUC { DataContext = new EventVM() });
+                        mainVm.RequestViewChange?.Invoke(new ShowEventsUC { DataContext = vm });
                     }
                     else if (window is MainWindow mw)
                     {
-                        mw.MainContentControl.Content = new ShowEventsUC { DataContext = new EventVM() };
+                        mw.MainContentControl.Content = new ShowEventsUC { DataContext = vm };
                     }
                 }
             }
