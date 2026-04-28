@@ -424,30 +424,9 @@ namespace ProjektWocheTeamzentrum.ViewModels
             StartingTime = start;
             DurationInMinutes = (int)(end - start).TotalMinutes;
         }
-        public ObservableCollection<DayVM> MonthDays { get; } = new ObservableCollection<DayVM>();
 
-        public void BuildCalendar(int year, int month)
-        {
-            MonthDays.Clear();
-            DateTime firstDay = new DateTime(year, month, 1);
-            int daysInMonth = DateTime.DaysInMonth(year, month);
 
-            // Wochentag von Montag (1) bis Sonntag (7)
-            int startDayOffset = (int)firstDay.DayOfWeek == 0 ? 6 : (int)firstDay.DayOfWeek - 1;
-
-            for (int i = 0; i < startDayOffset; i++) MonthDays.Add(new DayVM()); // Leere Tage
-
-            for (int i = 1; i <= daysInMonth; i++)
-            {
-                var date = new DateTime(year, month, i);
-                var dayVM = new DayVM(date);
-                foreach (var ev in Events.Where(e => e.StartingTime.Date == date.Date))
-                {
-                    dayVM.Events.Add(ev);
-                }
-                MonthDays.Add(dayVM);
-            }
-        }
+        
     }
 }
 

@@ -34,6 +34,9 @@ namespace ProjektWocheTeamzentrum.Views
             try
             {
                 CalendarGrid.DataContext = _calendarVm;
+                int year = _calendarVm.GetCalendarYear();
+                int month = _calendarVm.GetCalendarMonth();
+                _calendarVm.BuildCalendar(year, month);
             }
             catch
             {
