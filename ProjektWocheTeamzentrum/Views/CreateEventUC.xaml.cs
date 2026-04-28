@@ -96,6 +96,15 @@ namespace ProjektWocheTeamzentrum.Views
                     vm.UpdateStartingTime();
                     await vm.CreateEvent();
 
+                    // quick debug feedback: show count of events in the VM
+                    try
+                    {
+                        var count = vm.Events?.Count ?? 0;
+                        var last = count > 0 ? vm.Events[count - 1].Name : "(none)";
+                        MessageBox.Show($"Event created. Total events in VM: {count}\nLast: {last}", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch { }
+
                     var window = Window.GetWindow(this);
                     if (window != null && window.DataContext is ViewModels.MainWindowVM mainVm)
                     {

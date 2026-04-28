@@ -25,6 +25,14 @@ namespace ProjektWocheTeamzentrum.Views
             if (DataContext == null)
                 DataContext = new CalendarVM();
         }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            // if DataContext is EventVM, ensure the calendar grid is bound or refreshed
+            if (DataContext is ViewModels.EventVM evm)
+            {
+                // no-op: events collection is observable and UI will update automatically
+            }
+        }
 
         public void NewEvent_Click(object sender, RoutedEventArgs e)
         {

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ProjektWocheTeamzentrum.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+        <Grid x:Name="CalendarGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -88,7 +88,7 @@
             <RadioButton Content="iRacing" GroupName="SimulationFilter" Margin="10"/>
             <RadioButton Content="Real Life Motorsport" GroupName="SimulationFilter" Margin="10"/>
             <RadioButton Content="Team Events" GroupName="SimulationFilter" Margin="10"/>
-            <ListBox x:Name="EventsListBox" Margin="0,0,0,10"/>
+            <ListBox x:Name="EventsListBox" Margin="0,0,0,10" ItemsSource="{Binding Events}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedEvent, Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 </UserControl>
