@@ -15,6 +15,7 @@ namespace ProjektWocheTeamzentrum.Models.Users
         public DateOnly Birthday { get; set; }
         public int ClearanceLevel { get; set; } = 0;
         public int[] SimulationType { get; set; }
+        public string Team { get; set; } = string.Empty;
         // Do not call async methods synchronously in property initializers or constructors.
         // Id will be assigned when the user is persisted.
 

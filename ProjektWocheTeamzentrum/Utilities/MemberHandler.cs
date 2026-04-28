@@ -15,7 +15,7 @@ namespace ProjektWocheTeamzentrum.Utilities
         // später über datenbank mit rest api agenten - erstmal nur JSON
         public static async Task<List<User>> GetAllMembersAsync()
         {
-                List<User> members = new List<User>();
+            List<User> members = new List<User>();
             try
             {
 
@@ -67,19 +67,19 @@ namespace ProjektWocheTeamzentrum.Utilities
                 members.Add(user);
                 await SaveMembersAsync(members);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 try
                 {
 
-                ObservableCollection<User> members = new ObservableCollection<User>();
-                members.Add(user);
-                await SaveMembersAsync(members);
+                    ObservableCollection<User> members = new ObservableCollection<User>();
+                    members.Add(user);
+                    await SaveMembersAsync(members);
                 }
                 catch
                 {
-                        MessageBox.Show($"Error on Saving Members: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    
+                    MessageBox.Show($"Error on Saving Members: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 }
             }
         }
@@ -148,6 +148,29 @@ namespace ProjektWocheTeamzentrum.Utilities
                 }
             }
         }
+        private static async Task RemoveFromSquadAsync(User user)
+        {
+            try
+            {
+                string path = GetSquadsFilePath();
+                List<User> squads = new List<User>();
+                if (File.Exists(path))
+                {
+                    string jsonText = await File.ReadAllTextAsync(path);
+                    var squadList = JsonSerializer.Deserialize<List<User>>(jsonText) ?? new List<User>();
+                    foreach (var member in squadList)
+                    {
+                        squads.Add(member);
+                    }
+                }
+                squads.RemoveAll(u => u.Name == user.Name && u.Team == user.Team);
+                await SaveSquadsAsync(squads);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error on Removing from Squads: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private static ObservableCollection<User> CreateDefaultMembers()
         {
@@ -196,4 +219,5 @@ namespace ProjektWocheTeamzentrum.Utilities
             string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ProjektWocheTeamzentrum");
             return Path.Combine(dir, "squads.json");
         }
+    }
 }

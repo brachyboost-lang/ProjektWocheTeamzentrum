@@ -82,7 +82,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
             OnPropertyChanged(nameof(Squads));
         }
 
-        public int SquadsCount => Squads.Count();
+        public int SquadsCount => Squads.Count;
 
         public async Task AddMemberAsync()
         {
