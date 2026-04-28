@@ -23,7 +23,7 @@ namespace ProjektWocheTeamzentrum.Views
         {
             InitializeComponent();
             if (DataContext == null)
-                DataContext = new EventVM();
+                DataContext = new CalendarVM();
         }
 
         public void NewEvent_Click(object sender, RoutedEventArgs e)

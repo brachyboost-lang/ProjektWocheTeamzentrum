@@ -290,7 +290,11 @@ namespace ProjektWocheTeamzentrum.ViewModels
                         IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
                         starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
 
-                    await EventUtil.AddEventAsync(newEvent);
+                    bool success = await EventUtil.AddEventAsync(newEvent);
+                    if (success)
+                    {
+                        Events.Add(newEvent);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -310,8 +314,9 @@ namespace ProjektWocheTeamzentrum.ViewModels
                         _ => 0,
                     };
                     DateTime starting = SelectedDate.HasValue ? SelectedDate.Value.Date.AddHours(SelectedHour).AddMinutes(minutes) : DateTime.Now;
-                    var newEvent = new Event(StartingTime, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
+                    var newEvent = new Event(starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
                     await EventUtil.AddEventAsync(newEvent);
+                    Events.Add(newEvent);
                 }
                 catch (Exception ex)
                 {

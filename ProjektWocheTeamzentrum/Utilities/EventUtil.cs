@@ -29,15 +29,25 @@ namespace ProjektWocheTeamzentrum.Utilities
             }
             return events;
         }
-        public static async Task AddEventAsync(Event newEvent)
+        public static async Task<bool> AddEventAsync(Event newEvent)
         {
-            List<Event> events = await GetAllEventsAsync();
-            // assign EventId here so constructor doesn't need to call async code
-            int nextId = 1;
-            if (events.Count > 0) nextId = events[^1].EventId + 1;
-            newEvent.EventId = nextId;
-            events.Add(newEvent);
-            await SaveEventsAsync(events);
+            try
+            {
+                List<Event> events = await GetAllEventsAsync();
+
+                // assign EventId here so constructor doesn't need to call async code
+                int nextId = 1;
+                if (events.Count > 0) nextId = events[^1].EventId + 1;
+                newEvent.EventId = nextId;
+                events.Add(newEvent);
+                await SaveEventsAsync(events);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding event: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
         public static async Task SaveEventsAsync(List<Event> events)
         {
