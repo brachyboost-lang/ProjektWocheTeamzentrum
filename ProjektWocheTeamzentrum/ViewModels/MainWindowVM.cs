@@ -14,7 +14,6 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public RelayCommand ShowCoachingCommand => new RelayCommand(execute => ShowCoaching());
         public RelayCommand ShowSettingsCommand => new RelayCommand(execute => ShowSettings());
 
-        // expose as a plain delegate field so callers can invoke it when needed
         public Action<UserControl?>? RequestViewChange;
 
         private void ShowEvents()

@@ -12,19 +12,16 @@
         <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#121212"/>
         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#121212"/>
         <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#1E1E1E"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
+            <Setter Property="BorderBrush" Value="{StaticResource TeamRed}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ItemContainerStyle">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Border Background="#1E1E1E" BorderBrush="{StaticResource TeamRed}" BorderThickness="1" CornerRadius="2">
-                            <Grid>
-                                <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" 
-                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                          VerticalAlignment="Center" Margin="5,0"/>
-                                <ToggleButton Background="Transparent" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="#1E1E1E"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -218,41 +215,54 @@
                         </StackPanel>
                     </Grid>
                     <StackPanel Background="#333333" Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
-                        <DatePicker x:Name="EventDatePicker" Width="200" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border Background="#1E1E1E" BorderBrush="{StaticResource TeamRed}" BorderThickness="1" CornerRadius="2" Width="200" HorizontalAlignment="Left">
+                            <DatePicker x:Name="EventDatePicker" Background="Transparent" 
+                Foreground="White" 
+                Opacity="0.9" 
+                BorderThickness="0" Width="200" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
                         <Label Content="Start Time:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <ComboBox x:Name="HoursComboBox" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedHour, Mode=TwoWay}">
-                            <ComboBoxItem Content="00"/>
-                            <ComboBoxItem Content="01"/>
-                            <ComboBoxItem Content="02"/>
-                            <ComboBoxItem Content="03"/>
-                            <ComboBoxItem Content="04"/>
-                            <ComboBoxItem Content="05"/>
-                            <ComboBoxItem Content="06"/>
-                            <ComboBoxItem Content="07"/>
-                            <ComboBoxItem Content="08"/>
-                            <ComboBoxItem Content="09"/>
-                            <ComboBoxItem Content="10"/>
-                            <ComboBoxItem Content="11"/>
-                            <ComboBoxItem Content="12"/>
-                            <ComboBoxItem Content="13"/>
-                            <ComboBoxItem Content="14"/>
-                            <ComboBoxItem Content="15"/>
-                            <ComboBoxItem Content="16"/>
-                            <ComboBoxItem Content="17"/>
-                            <ComboBoxItem Content="18"/>
-                            <ComboBoxItem Content="19"/>
-                            <ComboBoxItem Content="20"/>
-                            <ComboBoxItem Content="21"/>
-                            <ComboBoxItem Content="22"/>
-                            <ComboBoxItem Content="23"/>
-                        </ComboBox>
-                        <Label Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <ComboBox x:Name="MinutesComboBox" Background="#333333" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedMinuteIndex, Mode=TwoWay}">
-                            <ComboBoxItem Content="00"/>
-                            <ComboBoxItem Content="15"/>
-                            <ComboBoxItem Content="30"/>
-                            <ComboBoxItem Content="45"/>
-                        </ComboBox>
+                        <Border Background="#1E1E1E" BorderBrush="{StaticResource TeamRed}" BorderThickness="1" CornerRadius="2" Padding="1">
+                            <ComboBox x:Name="HoursComboBox" Background="Transparent"
+          Foreground="White" 
+          BorderBrush="{StaticResource TeamRed}" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedHour, Mode=TwoWay}">
+                                <ComboBoxItem Content="00"/>
+                                <ComboBoxItem Content="01"/>
+                                <ComboBoxItem Content="02"/>
+                                <ComboBoxItem Content="03"/>
+                                <ComboBoxItem Content="04"/>
+                                <ComboBoxItem Content="05"/>
+                                <ComboBoxItem Content="06"/>
+                                <ComboBoxItem Content="07"/>
+                                <ComboBoxItem Content="08"/>
+                                <ComboBoxItem Content="09"/>
+                                <ComboBoxItem Content="10"/>
+                                <ComboBoxItem Content="11"/>
+                                <ComboBoxItem Content="12"/>
+                                <ComboBoxItem Content="13"/>
+                                <ComboBoxItem Content="14"/>
+                                <ComboBoxItem Content="15"/>
+                                <ComboBoxItem Content="16"/>
+                                <ComboBoxItem Content="17"/>
+                                <ComboBoxItem Content="18"/>
+                                <ComboBoxItem Content="19"/>
+                                <ComboBoxItem Content="20"/>
+                                <ComboBoxItem Content="21"/>
+                                <ComboBoxItem Content="22"/>
+                                <ComboBoxItem Content="23"/>
+                            </ComboBox>
+                            </Border>
+                            <Label Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                        <Border Background="#1E1E1E" BorderBrush="{StaticResource TeamRed}" BorderThickness="1" CornerRadius="2" Padding="1">
+                            <ComboBox x:Name="MinutesComboBox" Background="Transparent" 
+          Foreground="White" 
+          BorderBrush="{StaticResource TeamRed}" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedMinuteIndex, Mode=TwoWay}">
+                                <ComboBoxItem Content="00"/>
+                                <ComboBoxItem Content="15"/>
+                                <ComboBoxItem Content="30"/>
+                                <ComboBoxItem Content="45"/>
+                            </ComboBox>
+                        </Border>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
                         <Label Content="Duration:" HorizontalAlignment="Left" VerticalAlignment="Center"/>

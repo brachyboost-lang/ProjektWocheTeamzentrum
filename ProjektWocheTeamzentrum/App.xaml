@@ -5,6 +5,18 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="#1E1E1E"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TeamRed}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
+            <Style TargetType="DatePicker">
+                <Setter Property="Background" Value="#1E1E1E"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TeamRed}"/>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/TeamColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>

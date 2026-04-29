@@ -74,7 +74,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
             }
         }
 
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; } = "Description";
         public string LeagueURL { get; set; } = string.Empty;
         public string BroadcastURL { get; set; } = string.Empty;
         public bool IsEsports { get; set; } = false;

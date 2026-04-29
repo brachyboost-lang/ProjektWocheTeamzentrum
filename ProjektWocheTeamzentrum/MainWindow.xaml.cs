@@ -24,7 +24,7 @@ namespace ProjektWocheTeamzentrum
             var vm = new ViewModels.MainWindowVM();
             DataContext = vm;
             vm.RequestViewChange += Vm_RequestViewChange;
-            // show default view
+            //default view
             vm.RequestViewChange?.Invoke(new ShowEventsUC { DataContext = new EventVM() });
         }
 
