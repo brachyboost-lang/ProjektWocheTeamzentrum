@@ -16,5 +16,14 @@ namespace ProjektWocheTeamzentrum.Models.Events
                   durationInMinutes, meetingLocation, requiredClearanceLevel)
         {
         }
+        public RaceACC(List<CarClass> carClasses, string track, int simulationType, int maximumParticipants,
+    int driversPerCar, bool isEndurance, bool isEsports, bool isLeague, bool isBroadcasted,
+    string broadcastLink, DateTime startingTime, string name, int durationInMinutes, string meetingLocation,
+    int requiredClearanceLevel, string description)
+    : base(carClasses, track, 2, maximumParticipants, driversPerCar,
+          isEndurance, isEsports, isLeague, isBroadcasted, broadcastLink, startingTime, name,
+          durationInMinutes, meetingLocation, requiredClearanceLevel, description)
+        {
+        }
     }
 }

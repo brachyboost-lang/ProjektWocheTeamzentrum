@@ -303,59 +303,55 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
         public async Task CreateEvent()
         {
-            if (SimulationType > 0)
+            try
             {
-
-                try
+                var carClasses = new List<CarClass>(SelectedCarClasses);
+                int minutes = SelectedMinuteIndex switch
                 {
-                    var carClasses = new List<CarClass>(SelectedCarClasses);
-                    int minutes = SelectedMinuteIndex switch
-                    {
-                        1 => 15,
-                        2 => 30,
-                        3 => 45,
-                        _ => 0,
-                    };
-                    DateTime starting = SelectedDate.HasValue ? SelectedDate.Value.Date.AddHours(SelectedHour).AddMinutes(minutes) : DateTime.Now;
+                    1 => 15,
+                    2 => 30,
+                    3 => 45,
+                    _ => 0,
+                };
+                DateTime starting = SelectedDate.HasValue ? SelectedDate.Value.Date.AddHours(SelectedHour).AddMinutes(minutes) : DateTime.Now;
 
-                    var newEvent = new Race(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
-                        IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
-                        starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
+                Event newEvent;
 
-                    bool success = await EventUtil.AddEventAsync(newEvent);
-                    if (success)
-                    {
-                        Events.Add(newEvent);
-                    }
+                // Hier wird der Typ dynamisch anhand der SimulationType-ID gewählt
+                switch (SimulationType)
+                {
+                    case 1: 
+                        newEvent = new RaceLMU(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
+                            IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
+                            starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
+                        break;
+                    case 2: 
+                        newEvent = new RaceACC(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
+                            IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
+                            starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
+                        break;
+                    case 3: 
+                        newEvent = new RaceIRacing(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
+                            IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
+                            starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
+                        break;
+                    default: 
+                        newEvent = new Meeting(starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
+                        break;
                 }
-                catch (Exception ex)
+
+                bool success = await EventUtil.AddEventAsync(newEvent);
+                if (success)
                 {
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Error;
-                    MessageBox.Show($"Error creating event: {ex.Message}", "Error", button, icon);
-                }
-            }
-            if (SimulationType == 0)
-                try
-                {
-                    int minutes = SelectedMinuteIndex switch
-                    {
-                        1 => 15,
-                        2 => 30,
-                        3 => 45,
-                        _ => 0,
-                    };
-                    DateTime starting = SelectedDate.HasValue ? SelectedDate.Value.Date.AddHours(SelectedHour).AddMinutes(minutes) : DateTime.Now;
-                    var newEvent = new Event(starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
-                    await EventUtil.AddEventAsync(newEvent);
                     Events.Add(newEvent);
                 }
-                catch (Exception ex)
-                {
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Error;
-                    MessageBox.Show($"Error creating event: {ex.Message}", "Error", button, icon);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Error;
+                MessageBox.Show($"Error creating event: {ex.Message}", "Error", button, icon);
+            }
         }
 
         private const double HourHeight = 60; // 1 Stunde = 60px

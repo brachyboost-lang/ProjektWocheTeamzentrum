@@ -66,13 +66,16 @@ namespace ProjektWocheTeamzentrum.Views
                 }
             }
         }
-        private void Event_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void Event_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var border = sender as FrameworkElement;
             if (border?.DataContext is Event clickedEvent)
             {
-                // Beispiel: Zeige Details an
-                MessageBox.Show($"Event: {clickedEvent.Name}\nZeit: {clickedEvent.StartingTime}", "Event Details");
+
+                string details = await EventUtil.GetEventDetails(clickedEvent);
+
+ 
+                MessageBox.Show(details, $"Details für: {clickedEvent.Name}");
             }
         }
 

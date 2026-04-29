@@ -141,6 +141,31 @@ namespace ProjektWocheTeamzentrum.Utilities
                 return false;
             }
         }
+        public static async Task<string> GetEventDetails(Event ev)
+        {
+            // Basis-Informationen
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Zeit: {ev.StartingTime}");
+            sb.AppendLine($"Ort: {ev.EventLocation}");
+            sb.AppendLine($"Beschreibung: {ev.Description}");
+            sb.AppendLine("--------------------------");
+
+            // Typ-spezifische Informationen
+            switch (ev)
+            {
+                case Race r:
+                    sb.AppendLine($"Strecke: {r.Track}");
+                    sb.AppendLine($"Teilnehmer: {r.MaximumParticipants}");
+                    sb.AppendLine($"Endurance: {(r.IsEndurance ? "Ja" : "Nein")}");
+                    break;
+
+                case Meeting m:
+                    sb.AppendLine("Dies ist ein Meeting. (Hier könnten Zoom-Links o.ä. stehen)");
+                    break;
+            }
+
+            return sb.ToString();
+        }
 
         private static string GetEventsFilePath()
         {
