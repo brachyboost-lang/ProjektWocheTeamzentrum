@@ -13,7 +13,6 @@ namespace ProjektWocheTeamzentrum.Models.Events
 
         public List<CarClass> CarClasses { get; set; } = new List<CarClass>();
         public string Track { get; set; } = string.Empty;
-        public int SimulationType { get; set; }
         public int MaximumParticipants { get; set; }
         public int DriversPerCar { get; set; } = 1;
         public bool IsEndurance { get; set; } = false;
@@ -24,11 +23,11 @@ namespace ProjektWocheTeamzentrum.Models.Events
         public Race(List<CarClass> carClasses, string track, int simulationType, int maximumParticipants, int driversPerCar, 
             bool isEndurance, bool isEsports, bool isLeague, bool isBroadcasted, string broadcastLink, 
             DateTime startingTime, string name, int durationInMinutes, string meetingLocation, int requiredClearanceLevel, string description)
-            : base(startingTime, name, durationInMinutes, meetingLocation, requiredClearanceLevel, description)
+            : base(startingTime, name, durationInMinutes, meetingLocation, requiredClearanceLevel, description, simulationType)
         {
             CarClasses = carClasses;
             Track = track;
-            SimulationType = simulationType;
+
             MaximumParticipants = maximumParticipants;
             DriversPerCar = driversPerCar;
             IsEndurance = isEndurance;

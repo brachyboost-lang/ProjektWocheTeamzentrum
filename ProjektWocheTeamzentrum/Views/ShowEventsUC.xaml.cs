@@ -51,7 +51,7 @@ namespace ProjektWocheTeamzentrum.Views
 
         public void NewEvent_Click(object sender, RoutedEventArgs e)
         {
-            // Request the main window to switch the content to CreateEventUC
+
             var window = Window.GetWindow(this);
             if (window != null && window.DataContext is MainWindowVM vm)
             {

@@ -25,7 +25,6 @@ namespace ProjektWocheTeamzentrum.Views
             InitializeComponent();
             EventVM dc = new EventVM();
             DataContext = dc;
-            // set default simulation view and ensure CarClassContentControl has the VM as content
             CarClassContentControl.Content = DataContext;
             SimulationTypeRadioButton.IsChecked = true;
         }

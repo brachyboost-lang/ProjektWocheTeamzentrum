@@ -48,121 +48,174 @@
                 <TextBox x:Name="MaxDriversPerCarTextBox" Width="40" Height="24" Text="{Binding MaxDriversPerCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
             </StackPanel>
         </DataTemplate>
-
         <DataTemplate x:Key="RaceTemplate">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBox x:Name="TrackTextBox" Text="{Binding Track, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="24" Margin="0,0,0,8" HorizontalAlignment="Left"/>
-                    <StackPanel Margin="8,0,0,0">
-                        <RadioButton Content="Livestream" GroupName="rbIsLivestreamed" IsChecked="{Binding IsBroadcasted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
-                        <ContentControl x:Name="LivestreamContentControl" Margin="0,0,0,0"/>
-                    </StackPanel>
-                </StackPanel>
+            <StackPanel Margin="0,0,0,8" Width="500" HorizontalAlignment="Left">
 
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <RadioButton Content="Endurance" GroupName="rbIsEndurance" IsChecked="{Binding IsEndurance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
-                    <RadioButton Content="League" GroupName="rbIsLeague" IsChecked="{Binding IsLeague, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="8,0,0,10"/>
-                    <ContentControl x:Name="LeagueContentControl" Margin="16,0,0,0"/>
-                </StackPanel>
+                <RadioButton x:Name="rbLivestream" Content="Livestream" GroupName="rbIsLivestreamed" IsChecked="{Binding IsBroadcasted, Mode=TwoWay}" Margin="0,0,0,5"/>
+                <ContentControl Margin="16,0,0,10">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=rbLivestream}" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource LivestreamTemplate}"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
 
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <RadioButton Content="E-Sport" GroupName="rbIsEsport" IsChecked="{Binding IsEsports, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
-                    <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
-                        <RadioButton Content="Max. Participants" Checked="MaxParticipants_Checked" GroupName="rbMaxParticipants" Margin="0,0,0,10"/>
-                        <ContentControl x:Name="MaxParticipantsContentControl" Margin="8,0,0,0"/>
-                        <RadioButton Content="Max. Drivers per Car" Checked="MaxDriversPerCar_Checked" GroupName="rbMaxDriversPerCar" Margin="8,0,0,0"/>
-                        <ContentControl x:Name="MaxDriversPerCarContentControl" Margin="8,0,0,0"/>
-                    </StackPanel>
+                <RadioButton x:Name="rbLeague" Content="League" GroupName="rbIsLeague" IsChecked="{Binding IsLeague, Mode=TwoWay}" Margin="0,0,0,5"/>
+                <ContentControl Margin="16,0,0,10">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=rbLeague}" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource LeagueTemplate}"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+
+                <RadioButton x:Name="rbEndurance" Content="Endurance" GroupName="rbIsEndurance" IsChecked="{Binding IsEndurance, Mode=TwoWay}" Margin="0,0,0,10"/>
+
+                <RadioButton x:Name="rbEsport" Content="E-Sport" GroupName="rbIsEsport" IsChecked="{Binding IsEsports, Mode=TwoWay}" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <RadioButton x:Name="rbMaxParticipants" Content="Max. Participants" GroupName="rbMaxParticipants" Margin="0,0,10,0"/>
+                    <ContentControl Margin="5,0,10,0">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=rbMaxParticipants}" Value="True">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource MaxParticipantsTemplate}"/>
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+
+                    <RadioButton x:Name="rbMaxDrivers" Content="Max. Drivers per Car" GroupName="rbMaxDriversPerCar" Margin="0,0,10,0"/>
+                    <ContentControl Margin="5,0,0,0">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=rbMaxDrivers}" Value="True">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource MaxDriversPerCarTemplate}"/>
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
-     
-        
+
+
         <DataTemplate x:Key="AllTemplate">
             <StackPanel>
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-      MaxHeight="200">
-
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
                     <ItemsControl ItemsSource="{Binding TeamEvents}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
-                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                      Margin="0,0,0,3"/>
-                                    <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                                    <ToggleButton Foreground="{StaticResource TeamRed}" 
+                                          Content="{Binding Name}"
+                                          IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          Margin="0,0,0,3"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-
                 </ScrollViewer>
+
+                <ContentControl Margin="16">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SimulationType}" Value="1">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource LMUTemplate}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SimulationType}" Value="2">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource ACCTemplate}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SimulationType}" Value="3">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource iRacingTemplate}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="LMUTemplate">
             <StackPanel>
-                <ScrollViewer  VerticalScrollBarVisibility="Auto"
-      MaxHeight="200">
-
-                <ItemsControl ItemsSource="{Binding LMUCarClasses}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
-                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                      Margin="0,0,0,3"/>
-                                <ContentControl x:Name="RaceContentControl" Margin="16"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                </ScrollViewer>
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- ACC -->
-        <DataTemplate x:Key="ACCTemplate">
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  MaxHeight="200">
-
-                <ItemsControl ItemsSource="{Binding ACCCarClasses}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
-                                  IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                  Margin="0,0,0,3"/>
-                                <ContentControl x:Name="RaceContentControl" Margin="16"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-            </ScrollViewer>
-        </DataTemplate>
-
-        <!-- IRACING -->
-        <DataTemplate x:Key="iRacingTemplate">
-            <StackPanel>
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-      MaxHeight="200">
-
-                    <ItemsControl ItemsSource="{Binding IRCarClasses}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                    <ItemsControl ItemsSource="{Binding LMUCarClasses}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <ToggleButton Foreground="{StaticResource TeamRed}"  Content="{Binding Name}"
-                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                      Margin="0,0,0,3"/>
-                                    <ContentControl x:Name="RaceContentControl" Margin="16"/>
+                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
+                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                      Margin="0,0,0,3"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-
                 </ScrollViewer>
+                <ContentControl Content="{Binding}" 
+                                ContentTemplate="{StaticResource RaceTemplate}" 
+                                Margin="16"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ACCTemplate">
+            <StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                    <ItemsControl ItemsSource="{Binding ACCCarClasses}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
+                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                      Margin="0,0,0,3"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <ContentControl Content="{Binding}" 
+                                ContentTemplate="{StaticResource RaceTemplate}" 
+                                Margin="16"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="iRacingTemplate">
+            <StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                    <ItemsControl ItemsSource="{Binding IRCarClasses}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
+                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                      Margin="0,0,0,3"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <ContentControl Content="{Binding}" 
+                                ContentTemplate="{StaticResource RaceTemplate}" 
+                                Margin="16"/>
             </StackPanel>
         </DataTemplate>
 
@@ -276,7 +329,7 @@
                         </ComboBox>
                     </StackPanel>
                     <ContentControl x:Name="CarClassContentControl" Margin="16"/>
-                    <ListBox ItemsSource="{Binding SelectedCarClasses}"
+                    <ListBox ItemsSource="{Binding SelectedCarClasses}" Background="#333333"
 DisplayMemberPath="Name"
 Width="200"/>
                     

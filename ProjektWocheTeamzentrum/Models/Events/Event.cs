@@ -32,6 +32,18 @@ namespace ProjektWocheTeamzentrum.Models.Events
             EndingTime = endingTime;
         }
 
+        public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel, string description, int simulationType)
+        {
+            IdHandler++;
+            EventId = IdHandler;
+            StartingTime = startingTime;
+            Name = name;
+            DurationInMinutes = durationInMinutes;
+            EventLocation = eventLocation;
+            RequiredClearanceLevel = requiredClearanceLevel;
+            Description = description ?? string.Empty;
+            SimulationType = simulationType;
+        }
         public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel, string description)
         {
             IdHandler++;
@@ -42,11 +54,16 @@ namespace ProjektWocheTeamzentrum.Models.Events
             EventLocation = eventLocation;
             RequiredClearanceLevel = requiredClearanceLevel;
             Description = description ?? string.Empty;
+            SimulationType = 0;
         }
 
         //backwards compatibility constructor without description parameter, faster than finding all usages right now, close to deadline
+        public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel, int simulationType)
+            : this(startingTime, name, durationInMinutes, eventLocation, requiredClearanceLevel, string.Empty, simulationType)
+        {
+        }
         public Event(DateTime startingTime, string name, int durationInMinutes, string eventLocation, int requiredClearanceLevel)
-            : this(startingTime, name, durationInMinutes, eventLocation, requiredClearanceLevel, string.Empty)
+           : this(startingTime, name, durationInMinutes, eventLocation, requiredClearanceLevel, string.Empty)
         {
         }
     }

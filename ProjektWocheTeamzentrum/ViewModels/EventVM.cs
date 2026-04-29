@@ -306,51 +306,27 @@ namespace ProjektWocheTeamzentrum.ViewModels
             try
             {
                 var carClasses = new List<CarClass>(SelectedCarClasses);
-                int minutes = SelectedMinuteIndex switch
-                {
-                    1 => 15,
-                    2 => 30,
-                    3 => 45,
-                    _ => 0,
-                };
+                int minutes = SelectedMinuteIndex switch { 1 => 15, 2 => 30, 3 => 45, _ => 0 };
                 DateTime starting = SelectedDate.HasValue ? SelectedDate.Value.Date.AddHours(SelectedHour).AddMinutes(minutes) : DateTime.Now;
 
                 Event newEvent;
 
-                // Hier wird der Typ dynamisch anhand der SimulationType-ID gewählt
                 switch (SimulationType)
                 {
-                    case 1: 
-                        newEvent = new RaceLMU(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
-                            IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
-                            starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
-                        break;
-                    case 2: 
-                        newEvent = new RaceACC(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
-                            IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
-                            starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
-                        break;
-                    case 3: 
-                        newEvent = new RaceIRacing(carClasses, Track ?? string.Empty, SimulationType, MaxParticipants, MaxDriversPerCar,
-                            IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL ?? string.Empty,
-                            starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
-                        break;
-                    default: 
-                        newEvent = new Meeting(starting, Name, DurationInMinutes, EventLocation ?? string.Empty, RequiredClearanceLevel, Description ?? string.Empty);
-                        break;
+                    case 1: newEvent = new RaceLMU(carClasses, Track, 1, MaxParticipants, MaxDriversPerCar, IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL, starting, Name, DurationInMinutes, EventLocation, RequiredClearanceLevel, Description); break;
+                    case 2: newEvent = new RaceACC(carClasses, Track, 2, MaxParticipants, MaxDriversPerCar, IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL, starting, Name, DurationInMinutes, EventLocation, RequiredClearanceLevel, Description); break;
+                    case 3: newEvent = new RaceIRacing(carClasses, Track, 3, MaxParticipants, MaxDriversPerCar, IsEndurance, IsEsports, IsLeague, IsBroadcasted, BroadcastURL, starting, Name, DurationInMinutes, EventLocation, RequiredClearanceLevel, Description); break;
+                    default: newEvent = new Meeting(starting, Name, DurationInMinutes, EventLocation, RequiredClearanceLevel, Description); break;
                 }
 
-                bool success = await EventUtil.AddEventAsync(newEvent);
-                if (success)
+                if (await EventUtil.AddEventAsync(newEvent))
                 {
                     Events.Add(newEvent);
                 }
             }
             catch (Exception ex)
             {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBox.Show($"Error creating event: {ex.Message}", "Error", button, icon);
+                MessageBox.Show($"Fehler: {ex.Message}");
             }
         }
 
