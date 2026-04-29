@@ -58,7 +58,7 @@
         <Button Content="New Event" Click="NewEvent_Click" Margin="10"/>
             <Button Content="Delete Event" 
         Click="DeleteEvent_Click" 
-            Visibility="{Binding LogInUser.ClearanceLevel, Converter={StaticResource ClearanceConverter}}"
+            Visibility="{Binding LogInUser.ClearanceLevel, Converter={StaticResource ClearanceLevelConverter}}"
         Margin="10"/>
         <RadioButton Content="All" GroupName="SimulationFilter" Margin="10"/>
         <RadioButton Content="Le Mans Ultimate" GroupName="SimulationFilter" Margin="10"/>
@@ -66,14 +66,19 @@
         <RadioButton Content="iRacing" GroupName="SimulationFilter" Margin="10"/>
         <RadioButton Content="Real Life Motorsport" GroupName="SimulationFilter" Margin="10"/>
         <RadioButton Content="Team Events" GroupName="SimulationFilter" Margin="10"/>
-            <ListView x:Name="SortedEventsList" ItemsSource="{Binding SortedFutureEvents}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding StartingTime, StringFormat='dd.MM.yyyy'}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="SortedEventsList" 
+              ItemsSource="{Binding Events}" 
+              Background="{StaticResource TeamBlack}" 
+              Foreground="White">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding StartingTime, StringFormat='dd.MM.yyyy'}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </UserControl>

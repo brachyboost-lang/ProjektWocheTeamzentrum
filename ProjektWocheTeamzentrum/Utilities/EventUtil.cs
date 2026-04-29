@@ -6,6 +6,7 @@ using ProjektWocheTeamzentrum.Models.Events;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
+using System.Linq;
 
 namespace ProjektWocheTeamzentrum.Utilities
 {

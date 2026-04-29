@@ -22,28 +22,23 @@ namespace ProjektWocheTeamzentrum.Views
     public partial class ShowEventsUC : UserControl
     {
         private CalendarVM? _calendarVm;
+        private EventVM _eventVm;
 
         public ShowEventsUC()
         {
             InitializeComponent();
-            if (DataContext == null)
-                DataContext = new CalendarVM();
 
-            // create a dedicated CalendarVM for the left-side calendar and assign it
-            // to the named grid so its bindings (Hours, Days) work regardless of
-            // the control's overall DataContext (which may be an EventVM).
+
+            _eventVm = new EventVM();
             _calendarVm = new CalendarVM();
-            try
-            {
-                CalendarGrid.DataContext = _calendarVm;
-                int year = _calendarVm.GetCalendarYear();
-                int month = _calendarVm.GetCalendarMonth();
-                _calendarVm.BuildCalendar(year, month);
-            }
-            catch
-            {
-                // ignore if the named element isn't present at construction time
-            }
+
+
+            CalendarGrid.DataContext = _calendarVm;
+
+            SortedEventsList.ItemsSource = _eventVm.Events;
+
+            _ = _eventVm.InitializeEvents();
+            _ = _calendarVm.BuildCalendar(DateTime.Now.Year, DateTime.Now.Month);
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -83,11 +78,21 @@ namespace ProjektWocheTeamzentrum.Views
 
         private async void DeleteEvent_Click(object sender, RoutedEventArgs e)
         {
-            // Hier die Logik zum Löschen
-            if (DataContext is EventVM vm && vm.SelectedEvent != null)
+            var selectedEvent = SortedEventsList.SelectedItem as Event;
+
+            if (selectedEvent != null)
             {
-                await EventUtil.DeleteEventAsync(vm.SelectedEvent.EventId);
-               
+                bool success = await EventUtil.DeleteEventAsync(selectedEvent.EventId);
+
+                if (success)
+                {
+                    _eventVm.Events.Remove(selectedEvent);
+                    MessageBox.Show("Event erfolgreich gelöscht!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bitte wähle zuerst ein Event in der Liste aus.");
             }
         }
     }

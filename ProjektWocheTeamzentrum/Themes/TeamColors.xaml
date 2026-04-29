@@ -30,4 +30,10 @@
         <Setter Property="Background" Value="{StaticResource TeamRed}"/>
 
     </Style>
+    <Style TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="{StaticResource TeamBlack}"/>
+        <Setter Property="Foreground" Value="{StaticResource TeamRed}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="5"/>
+    </Style>
 </ResourceDictionary>

@@ -129,7 +129,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
             return false;
         }
 
-        // Date and time selection helpers for bindings
+
         private DateTime? _selectedDate = DateTime.Today;
         public DateTime? SelectedDate
         {
@@ -146,7 +146,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         }
 
         private int _selectedHour = DateTime.Now.Hour;
-        // bind to Hours ComboBox.SelectedIndex
+
         public int SelectedHour
         {
             get => _selectedHour;
@@ -162,7 +162,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         }
 
         private int _selectedMinuteIndex = 0; // 0->0,1->15,2->30,3->45
-        // bind to Minutes ComboBox.SelectedIndex
+
         public int SelectedMinuteIndex
         {
             get => _selectedMinuteIndex;
@@ -195,33 +195,43 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
         public async Task InitializeEvents()
         {
+            if (_isInitialized) return;
+            _isInitialized = true;
             try
             {
-                var cvm = new CalendarVM();
+
+                Events.Clear();
+                Days.Clear();
+
+                List<Event> events = await EventUtil.GetAllEventsAsync();
+
+                foreach (var e in events.OrderBy(ev => ev.StartingTime))
+                {
+                    Events.Add(e);
+                }
+
+               
                 var date = DateTime.Today;
-                var dayVM = new DayVM { DayName = date.ToString("dddd") };
-                List<Event> events = new List<Event>();
-                events = await EventUtil.GetAllEventsAsync();
                 for (int i = 0; i < 7; i++)
                 {
-                    date = date.AddDays(i);
-                    // Filter events for this day
-                    foreach (var e in events.Where(ev => ev.StartingTime.Date == date.Date))
+                    var dayDate = date.AddDays(i);
+                    var dayVM = new DayVM { DayName = dayDate.ToString("dddd") };
+
+                    
+                    foreach (var e in events.Where(ev => ev.StartingTime.Date == dayDate.Date))
                     {
                         dayVM.Events.Add(e);
                     }
                     Days.Add(dayVM);
                 }
-                foreach (Event e in events)
-                {
-                    Events.Add(e);
 
-                }
-                cvm.BuildCalendar(DateTime.Now.Year, DateTime.Now.Month);
+               
+                var cvm = new CalendarVM();
+                await cvm.BuildCalendar(DateTime.Now.Year, DateTime.Now.Month);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                System.Diagnostics.Debug.WriteLine($"Fehler in InitializeEvents: {ex.Message}");
             }
         }
 
@@ -265,7 +275,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
             }
         }
-
+        private bool _isInitialized = false;
         public EventVM()
         {
             Events.CollectionChanged += (s, e) => OnPropertyChanged(nameof(SortedFutureEvents));
