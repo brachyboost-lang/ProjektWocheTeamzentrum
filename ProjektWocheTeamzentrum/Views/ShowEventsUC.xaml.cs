@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjektWocheTeamzentrum.Models.Events;
+using ProjektWocheTeamzentrum.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -10,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ProjektWocheTeamzentrum.ViewModels;
+using ProjektWocheTeamzentrum.Utilities;
 
 namespace ProjektWocheTeamzentrum.Views
 {
@@ -67,6 +69,25 @@ namespace ProjektWocheTeamzentrum.Views
                 {
                     mw.MainContentControl.Content = new CreateEventUC();
                 }
+            }
+        }
+        private void Event_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var border = sender as FrameworkElement;
+            if (border?.DataContext is Event clickedEvent)
+            {
+                // Beispiel: Zeige Details an
+                MessageBox.Show($"Event: {clickedEvent.Name}\nZeit: {clickedEvent.StartingTime}", "Event Details");
+            }
+        }
+
+        private async void DeleteEvent_Click(object sender, RoutedEventArgs e)
+        {
+            // Hier die Logik zum Löschen
+            if (DataContext is EventVM vm && vm.SelectedEvent != null)
+            {
+                await EventUtil.DeleteEventAsync(vm.SelectedEvent.EventId);
+               
             }
         }
     }

@@ -62,6 +62,8 @@ namespace ProjektWocheTeamzentrum.ViewModels
             DateTime now = DateTime.Now;
             return (int)now.Month;
         }
+
+
     }
 }
 

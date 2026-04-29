@@ -13,11 +13,9 @@ namespace ProjektWocheTeamzentrum.ViewModels
 {
     public class EventVM : BaseVM
     {
-        // Core collections
         public ObservableCollection<Event> Events { get; } = new ObservableCollection<Event>();
         public ObservableCollection<User> RegisteredParticipants { get; } = new ObservableCollection<User>();
 
-        // Basic event properties
         private DateTime _startingTime = DateTime.Now;
         public DateTime StartingTime
         {
@@ -86,6 +84,9 @@ namespace ProjektWocheTeamzentrum.ViewModels
         public bool IsEndurance { get; set; } = false;
 
         public User? LoggedInUser { get; set; }
+        public IEnumerable<Event> SortedFutureEvents =>
+    Events.Where(e => e.StartingTime >= DateTime.Now)
+          .OrderBy(e => e.StartingTime);
 
         // Car class collections
         public ObservableCollection<CarClass> AvailableCarClasses { get; } = new ObservableCollection<CarClass>();
@@ -267,6 +268,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
 
         public EventVM()
         {
+            Events.CollectionChanged += (s, e) => OnPropertyChanged(nameof(SortedFutureEvents));
             _ = InitializeEvents();
             _ = InitializeCarClasses();
             var teamEventClass = new CarClass
@@ -423,6 +425,7 @@ namespace ProjektWocheTeamzentrum.ViewModels
         // Convenience constructor used by CalendarVM for demo events
         public EventVM(string title, DateTime start, DateTime end)
         {
+            Events.CollectionChanged += (s, e) => OnPropertyChanged(nameof(SortedFutureEvents));
             Name = title;
             StartingTime = start;
             DurationInMinutes = (int)(end - start).TotalMinutes;

@@ -115,6 +115,31 @@ namespace ProjektWocheTeamzentrum.Utilities
                 MessageBox.Show($"Error saving events file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        public static async Task<bool> DeleteEventAsync(int eventId)
+        {
+            try
+            {
+                List<Event> events = await GetAllEventsAsync();
+                var eventToDelete = events.FirstOrDefault(e => e.EventId == eventId);
+
+                if (eventToDelete != null)
+                {
+                    events.Remove(eventToDelete);
+                    await SaveEventsAsync(events);
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Event konnte nicht gefunden werden.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Löschen des Events: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
 
         private static string GetEventsFilePath()
         {
