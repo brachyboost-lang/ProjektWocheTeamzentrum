@@ -7,7 +7,27 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#CC0000"/>
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White"/>
+        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#121212"/>
+        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#121212"/>
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Border Background="#1E1E1E" BorderBrush="{StaticResource TeamRed}" BorderThickness="1" CornerRadius="2">
+                            <Grid>
+                                <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" 
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          VerticalAlignment="Center" Margin="5,0"/>
+                                <ToggleButton Background="Transparent" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <DataTemplate x:Key="LeagueTemplate">
             <StackPanel>
                 <TextBox x:Name="LeagueURLTextBox" Width="200" Height="24" Text="{Binding LeagueURL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
@@ -70,9 +90,9 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <ToggleButton Content="{Binding Name}"
+                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
                       IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                      Margin="0,0,0,10"/>
+                      Margin="0,0,0,3"/>
                                     <ContentControl x:Name="RaceContentControl" Margin="16"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -92,9 +112,9 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ToggleButton Content="{Binding Name}"
+                                    <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
                       IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                      Margin="0,0,0,10"/>
+                      Margin="0,0,0,3"/>
                                 <ContentControl x:Name="RaceContentControl" Margin="16"/>
                             </StackPanel>
                         </DataTemplate>
@@ -114,9 +134,9 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ToggleButton Content="{Binding Name}"
+                                <ToggleButton Foreground="{StaticResource TeamRed}" Content="{Binding Name}"
                                   IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                  Margin="0,0,0,10"/>
+                                  Margin="0,0,0,3"/>
                                 <ContentControl x:Name="RaceContentControl" Margin="16"/>
                             </StackPanel>
                         </DataTemplate>
@@ -136,9 +156,9 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <ToggleButton Content="{Binding Name}"
+                                    <ToggleButton Foreground="{StaticResource TeamRed}"  Content="{Binding Name}"
                       IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                      Margin="0,0,0,10"/>
+                      Margin="0,0,0,3"/>
                                     <ContentControl x:Name="RaceContentControl" Margin="16"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -176,8 +196,8 @@
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7" Fill="LightGray" Margin="5,5,5,5"/>
         <Rectangle Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7" Fill="LightBlue" Margin="5,5,5,5"/>
         <ContentControl x:Name="ImageContentControl" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7" Margin="5,5,5,5"/>
-        
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7">
+
+        <Grid Grid.Column="0" Background="#121212" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="7">
             <DockPanel Margin="22" LastChildFill="True">
                 <StackPanel DockPanel.Dock="Left" Width="420" Margin="0,0,20,0" HorizontalAlignment="Left">
                     <TextBox x:Name="EventNameTextBox" Width="400" Height="24" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" HorizontalAlignment="Left"/>
@@ -197,7 +217,7 @@
                             <RadioButton x:Name="SimulationTypeRadioButton4" Tag="IR" GroupName="SimulationType" Checked="SimulationRadio_Checked" Height="20" Content="iRacing"/>
                         </StackPanel>
                     </Grid>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
+                    <StackPanel Background="#333333" Orientation="Horizontal" Margin="0,0,0,8" Width="400" HorizontalAlignment="Left">
                         <DatePicker x:Name="EventDatePicker" Width="200" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="Start Time:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
                         <ComboBox x:Name="HoursComboBox" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedHour, Mode=TwoWay}">
@@ -227,7 +247,7 @@
                             <ComboBoxItem Content="23"/>
                         </ComboBox>
                         <Label Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                        <ComboBox x:Name="MinutesComboBox" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedMinuteIndex, Mode=TwoWay}">
+                        <ComboBox x:Name="MinutesComboBox" Background="#333333" Width="50" Margin="0,0,0,0" SelectedIndex="{Binding SelectedMinuteIndex, Mode=TwoWay}">
                             <ComboBoxItem Content="00"/>
                             <ComboBoxItem Content="15"/>
                             <ComboBoxItem Content="30"/>
@@ -238,7 +258,7 @@
                         <Label Content="Duration:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <TextBox x:Name="DurationTextBox" HorizontalAlignment="Left" Width="80" Margin="8,0,0,0" Text="{Binding DurationInMinutes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="Participants:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                        <ComboBox x:Name="ParticipantsComboBox" Width="80" Margin="8,0,0,0" SelectedValuePath="Content" SelectedValue="{Binding SelectedParticipants, Mode=TwoWay}">
+                        <ComboBox x:Name="ParticipantsComboBox"  Width="80" Margin="8,0,0,0" SelectedValuePath="Content" SelectedValue="{Binding SelectedParticipants, Mode=TwoWay}">
                             <ComboBoxItem Content="Leaders"/>
                             <ComboBoxItem Content="Coach"/>
                             <ComboBoxItem Content="Members"/>
