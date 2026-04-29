@@ -1,6 +1,3 @@
-Coding-Assistent
-Hier sind prägnante Bullet Points, die du für deine Präsentationsfolien oder als Spickzettel nutzen kannst, um dein Projekt und die technische Umsetzung professionell zu präsentieren:
-
 1. Projekt-Kern (Die Vision)
 Zentralisierung: Aufbau eines einheitlichen Management-Systems für E-Sport und Team-Events.
 
